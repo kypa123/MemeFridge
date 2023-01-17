@@ -2,11 +2,15 @@ import express from 'express'
 import path from 'path'
 import * as url from 'url';
 
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const viewsRouter = express.Router();
 
-viewsRouter.use('/images', serveStatic('images'))
 viewsRouter.use('/', serveStatic('home'));
+viewsRouter.use('/nav',serveStatic('nav'));
+viewsRouter.use('/footer',serveStatic('footer'))
+viewsRouter.use('/main', serveStatic('main'));
+viewsRouter.use('/images', serveStatic('images'))
 viewsRouter.use('/detail', serveStatic('detail'))
 
 function serveStatic(resource) {

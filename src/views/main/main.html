@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>밈장고</title>
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="../footer/footer.css"
+    <script src="../nav/nav.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <script>
+        $(document).ready(function () {
+            $('#nav-placeholder').load('../nav/nav.html');
+        });
+    </script>
+    <h1>Hello</h1>
+    
+    <div id="footer-placeholder"></div>
+    <script>
+        $(function () {
+            $('#footer-placeholder').load('../footer/footer.html');
+        });
+    </script>
+</body>
+</html>

@@ -5,11 +5,16 @@ import logger from 'morgan'
 import errorHandler from './middlewares/errorHandler.js'
 import { viewsRouter } from './routes/index.js';
 
+
+
 const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+
 app.use(viewsRouter)
 
 
