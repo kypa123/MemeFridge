@@ -1,0 +1,11 @@
+.row{
+    display: flex;
+}
+
+.content{
+    text-align: center;
+}
+
+.content .content-img{
+    max-width: 230px;
+}
