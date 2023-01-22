@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import errorHandler from './middlewares/errorHandler.js'
 import { viewsRouter } from './routes/index.js';
-
+import * as db from './db/dao.js';
 
 
 const app = express();

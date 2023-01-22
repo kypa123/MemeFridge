@@ -1,18 +1,20 @@
-import * as mysql from 'mysql'
+import pg from 'pg';
 
-
-const connection = mysql.createConnection({
-    host : 'localhost',
-    user : process.env.DB_ID,
-    password: process.env.DB_PASSWORD,
-    database : 'test_db'
-})
+``
+const connection = new pg.Client({
+    user: process.env.DB_ID,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    // password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
+});
 
 connection.connect();
 
-connection.query('SELECT * FROM Test', (err, rows, fields) =>{
-    if (err) throw new Error;
-    console.log('User info : ', rows)
-});
-
-connection.end();
+connection.query("select * from test where id = '2222'", (err, res)=>{
+    if (!err) console.log(res);
+    else{
+        console.log(err);
+    }
+    connection.end();
+})
