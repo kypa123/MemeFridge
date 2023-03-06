@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Detail</title>
+
+    <script src="detail.js"></script>
+    <link rel="stylesheet" href="detail.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="../footer/footer.css"
+    <script src="../nav/nav.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
-    <img src="/images/pepe.png"  height = "50px" width= "50px" alt="no image">
+    <!-- navigation bar -->
+    <div id="nav-placeholder"></div>
+
+
+    <div id="content-container" class="container is-widescreen">
+        <img src="/images/smoking pepe.png">
+    </div>
+
+    
+    <!-- footer -->
+    <div id="footer-placeholder"></div>
+    <!-- footer -->
+
+    
 </body>
+<!-- load nav, footer -->
+<script>
+    $(document).ready(function () {
+        $('#nav-placeholder').load('../nav/nav.html');
+        $('#footer-placeholder').load('../footer/footer.html');
+    });
+</script>
 </html>

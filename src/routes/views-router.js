@@ -13,6 +13,8 @@ viewsRouter.use('/main', serveStatic('main'));
 viewsRouter.use('/images', serveStatic('images'))
 viewsRouter.use('/detail', serveStatic('detail'))
 
+viewsRouter.use('/',serveStatic(''))
+
 function serveStatic(resource) {
     const resourcePath = path.join(__dirname, `../views/${resource}`);
     const option = { index: `${resource}.html` };
