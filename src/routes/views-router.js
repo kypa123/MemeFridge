@@ -23,4 +23,4 @@ function serveStatic(resource) {
     return express.static(resourcePath, option);
 }
 
-export { viewsRouter };
+export default viewsRouter;

@@ -2,10 +2,10 @@
     display: flex;
 }
 
+
 .content{
     text-align: center;
+    margin: auto;
 }
-
-.content .content-img{
-    max-width: 230px;
-}
+/* .row:last-child{
+} */

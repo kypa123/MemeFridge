@@ -1,17 +1,12 @@
 import { Router } from 'express';
-import userModel from '../db/models/user-model.js'
+import {userService} from '../services/index.js'
 
 const userRouter = Router();
 
 userRouter.get('/', async function(req, res, next){
     try{
-        const userInfo = await userModel.findUser(22);
-        if (!userInfo.rows){
-            throw new Error('없는 회원입니다');
-        }
-        else{
-            res.json(userInfo.rows)
-        }
+        const userInfo = await userService.findUser('superuser');
+        res.json(userInfo)
     }
     catch(err){
         next(err);
@@ -19,7 +14,7 @@ userRouter.get('/', async function(req, res, next){
 })
 
 userRouter.post('/',async function(req, res, next){
-
+    const { name, password, email } = req.body;
 })
 
-export {userRouter}
+export default userRouter

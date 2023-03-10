@@ -3,7 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import errorHandler from './middlewares/errorHandler.js'
-import { viewsRouter, userRouter } from './routes/index.js';
+import { viewsRouter, userRouter, contentRouter } from './routes/index.js';
 import * as db from './db/index.js';
 
 
@@ -19,7 +19,7 @@ app.use(viewsRouter)
 
 
 app.use('/users',userRouter)
-
+app.use('/contents',contentRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,16 +1,18 @@
 import pg from 'pg';
+import connectionInfo from '../connectionInfo.js';
 
 
 class UserModel{
-    constructor(connection){
-        this.connection = new pg.Client(connection);
+    constructor(connectionInfo){
+        this.connectionInfo = connectionInfo
     }
     
-    async findUser(id){
+    async findUser(name){
         try{
-            await this.connection.connect()
-            const result = await this.connection.query(`select * from users where id=${id}`);
-            await this.connection.end()
+            const connection = new pg.Client(this.connectionInfo)
+            await connection.connect()
+            const result = await connection.query(`select * from users where name='${name}'`);
+            await connection.end()
             return result
         }
         catch(err){
@@ -20,9 +22,10 @@ class UserModel{
 
     async addUser(userInfo){
         try{
-            await this.connection.connect();
-            const result = await this.connection.query(`insert into users (name, password,email) values ('${userInfo.id}','${userInfo.password}','${userInfo.email}');`);
-            await this.connectind.end()
+            const connection = new pg.Client(this.connectionInfo)
+            await connection.connect()
+            const result = await connection.query(`insert into users (name, password,email) values ('${userInfo.name}','${userInfo.password}','${userInfo.email}');`);
+            await connection.end()
             return result;
         }
         catch(err){
@@ -32,9 +35,10 @@ class UserModel{
 
     async updateUser(userInfo){
         try{
-            await this.connection.connect();
-            const result = await this.connection.query(`update users set password = '${userInfo.password}', email = '${userInfo.email}' where id = '${userInfo.id}'`);
-            await this.connection.end();
+            const connection = new pg.Client(this.connectionInfo)
+            await connection.connect()
+            const result = await connection.query(`update users set password = '${userInfo.password}', email = '${userInfo.email}' where id = '${userInfo.id}'`);
+            await connection.end();
             return result;
         }
         catch(err){
@@ -42,11 +46,12 @@ class UserModel{
         }
     }
 
-    async deleteUser(userId){
+    async deleteUser(userName){
         try{
-            await this.connection.connect();
-            const result = await this.connection.query(`delete from users where id = ${userId}`);
-            await this.connectind.end()
+            const connection = new pg.Client(this.connectionInfo)
+            await connection.connect()
+            const result = await connection.query(`delete from users where name = ${userName}`);
+            await connection.end()
             return result;
         }
         catch(err){
@@ -56,12 +61,6 @@ class UserModel{
 
 }
 
-const userModel = new UserModel({
-    user: process.env.DB_ID,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
-});
+const userModel = new UserModel(connectionInfo);
 
 export default userModel;
