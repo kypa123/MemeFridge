@@ -2,34 +2,31 @@
 <head>
     <meta charset="UTF-8">
     <title>밈장고</title>
-
     <script src="main.js" type="module"></script>
+    
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
     <link rel="stylesheet" href="../footer/footer.css">
     <script src="../nav/nav.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="../content-modal/content-modal.js" type="module" defer></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     
 </head>
 <body>
     <!-- navigation bar -->
-    <div id="nav-placeholder"></div>
-
+    <div id="nav-placeholder"></div>    
     
-    <div id="content-container" class="container is-widescreen">
-    </div>
-
-
+    <div id="content-container" class="container is-widescreen"></div>
     <!-- footer -->
     <div id="footer-placeholder"></div>
-
-    
+    <!-- content modal -->
+    <div id="content-modal-placeholder"></div>
 </body>
-<!-- load nav, footer -->
 <script>
-    $(document).ready(function () {
-        $('#nav-placeholder').load('../nav/nav.html');
-        $('#footer-placeholder').load('../footer/footer.html');
-    });
+    $('#content-modal-placeholder').load('../content-modal/content-modal.html');
+    $('#nav-placeholder').load('../nav/nav.html');
+    $('#footer-placeholder').load('../footer/footer.html');
 </script>
+
 </html>
