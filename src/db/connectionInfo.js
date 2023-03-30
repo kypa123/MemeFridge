@@ -1,3 +1,7 @@
+import 'dotenv/config.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
 const connectionInfo = {
     user: process.env.DB_ID,
     host: process.env.DB_HOST,

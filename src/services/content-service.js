@@ -5,18 +5,13 @@ class ContentService{
         this.contentModel = contentModel;
     }
 
-    async addUser(userInfo){
-        const {name, password, email} = userInfo
-        const user = await this.userModel.findUser(name);
-        if (user){
-            throw new Error(
-                '이미 존재하는 아이디입니다'
-            );
-        }
-        const hashedPassword = await bcrypt.hash(password, 10)
-        const newUser = await this.userModel.addUser({name, hashedPassword, email});
-        console.log(newUser);
-        return newUser
+    async addContent(contentInfo){
+        const {name, url, desc} = contentInfo
+        
+        // 중복제거를 위한 로직 필요, 이미 존재하는 컨텐츠명 등
+        const result = await this.contentModel.addContent({name, hashedPassword, email});
+        console.log(result);
+        return result
 
     }
 
@@ -25,23 +20,14 @@ class ContentService{
         return result;
     }
 
-    async findUser(userName){
-        try{
-            const user = await this.userModel.findUser(userName);
-            return user;
-        }
-        catch(err){
-            return err;
-        }
+
+    async updateContent(contentInfo){
+        const result = await this.contentModel.updateContent(contentInfo);
+        return result;
     }
 
-    async updateUser(userInfo){
-        const user = await this.userModel.updateUser(userInfo);
-        return user;
-    }
-
-    async deleteUser(userId){
-        const result = await this.userModel.deleteUser(userId);
+    async deleteContent(contentInfo){
+        const result = await this.contentModel.deleteContent(contentInfo);
         return result;
     }
 }

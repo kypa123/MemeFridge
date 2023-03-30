@@ -1,7 +1,6 @@
 import pg from 'pg';
 import connectionInfo from '../connectionInfo.js';
 
-
 export class ContentModel{
     constructor(connectionInfo){
         this.connectioninfo = connectionInfo;
@@ -22,7 +21,7 @@ export class ContentModel{
 
     async findByOffset(offset){
         try{
-            const connection = new pg.Client(this.connectionInfo);
+            const connection = new pg.Client(this.connectioninfo);
             await connection.connect();
             const result = await connection.query(`select * from contents order by id limit 4 offset ${offset};`);
             await connection.end()

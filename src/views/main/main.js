@@ -10,7 +10,6 @@ async function loadMainContent(){
             const row = document.createElement('div')
             row.className = "row"
             result.rows.forEach(el=>{
-                console.log(el)
                 row.innerHTML += `
             <div class="content">
                 <figure class="image is-128x128">

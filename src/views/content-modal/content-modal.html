@@ -8,10 +8,12 @@
       <section class="modal-card-body">
         <!-- Content ... -->
         <div class="content-upload">
-            <form class="box content-upload-form">
+            <form class="box content-upload-form" enctype="multipart/form-data">
                 <div class="field">
-                    <label class="label" for="content-name"></label>
-                    <p>ㅎㅇㅎㅇ</p>
+                    <label class="label" for="content-name">
+                      <p>사진업로드</p>
+                      <input type="file" id="content-name" name="src" accept=".png, .jpeg, .jpg">
+                    </label>                    
                 </div>
                 <div class="field">
                   <label class="label" for="content-type"></label>
@@ -21,11 +23,12 @@
                 <label class="label" for="content-desc"></label>
                   <p>ㅎㅇㅎㅇ</p>
               </div>
+              <button class="button is-success">업로드</button>
             </form>
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success">업로드</button>
+        
         <button class="button">취소</button>
       </footer>
   </div>

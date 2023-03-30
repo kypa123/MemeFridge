@@ -1,3 +1,5 @@
+import * as Api from '../api.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
     function openModal($el) {
@@ -16,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Add a click event on buttons to open a specific modal
     const modalButton = document.getElementById('content-upload-modal-button');
-    console.log(modalButton)
     const modal = modalButton.dataset.target;
     const target = document.getElementById(modal);
     modalButton.addEventListener('click',()=>{
@@ -42,3 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+
+
+async function register(e){
+  try{
+    e.preventDefault();
+    const form = new FormData(myForm);
+    console.log('ㅎㅇㅎㅇ')
+    const result = await fetch('/contents',{
+      method:'POST',
+      body:form
+    })
+    console.log(result);
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+const myForm = document.querySelector('form')
+myForm.addEventListener('submit',register);
