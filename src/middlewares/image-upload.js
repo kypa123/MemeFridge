@@ -8,23 +8,25 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const cloudinaryUploader = cloudinary.uploader.upload_stream({folder:'images'},(err,res)=>{
-    if (err){
-        console.log(err)
-    }
-    else{
-        console.log('ok')
-        return res.url;
-    }
-});
+
 
 const upload = function(req, res, next){
     req.pipe(req.busboy)
-    
 
-    req.busboy.on('file', function(fieldname, file, filename){
+    req.busboy.on('file', async function(fieldname, file, filename){
         filename = utf8Decode(filename.filename)
-        file.pipe(cloudinaryUploader)
+        file.pipe(cloudinary.uploader.upload_stream({folder:'images', public_id: filename},(err,result)=>{
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log('ok')
+                if (result){
+                    res.imageURL = result.url;
+                    next()
+                }
+            }
+        }))
         .on("finish",()=>{
             console.log("업로드 대성공!")
         })
@@ -32,14 +34,8 @@ const upload = function(req, res, next){
             console.log('에러발생')
             console.log(err)
         })
-        .pipe(res)
-        .on("finish",()=>{
-            console.log('업로드도 성공했고, 다음에 싣기도 성공')
-            next()
-        })
-        .on("error",()=>{
-            console.log("무언가 문제가 발생했습니다")
-        })
+        
+
     });
 }
 
