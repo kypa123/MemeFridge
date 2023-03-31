@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add a keyboard event to close all modals
     document.addEventListener('keydown', (event) => {
       const e = event || window.event;
-  
-      if (e.keyCode === 27) { // Escape key
+      let key = e.key || e.keycode
+      if (key === 27) { // Escape key
         closeAllModals();
       }
     });
@@ -50,12 +50,18 @@ async function register(e){
   try{
     e.preventDefault();
     const form = new FormData(myForm);
+
+    // for (let [key, value] of form.entries()) { 
+    //   console.log(key, value);
+    // }
     console.log('ㅎㅇㅎㅇ')
     const result = await fetch('/contents',{
       method:'POST',
       body:form
     })
-    console.log(result);
+    if(result){
+      window.location.reload();
+    }
   }
   catch(err){
     console.log(err)

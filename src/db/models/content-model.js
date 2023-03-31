@@ -57,6 +57,20 @@ export class ContentModel{
             return err;
         }
     }
+
+    async addContent(contentInfo){
+        try{
+            const {name, desc, url} = contentInfo;
+            const connection = new pg.Client(this.conenctionInfo)
+            await connection.connect();
+            const result = await connection.query(`insert into contents (title, creator, url,description) values ('${name}', 2, '${url}', '${desc}')`)
+            await connection.end();
+            return result;
+        }
+        catch(err){
+            return err;
+        }
+    }
 }
 
 const contentModel = new ContentModel(connectionInfo);

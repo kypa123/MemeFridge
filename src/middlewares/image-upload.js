@@ -13,6 +13,9 @@ cloudinary.config({
 const upload = function(req, res, next){
     req.pipe(req.busboy)
 
+    req.busboy.on('field',(fieldname,value,info)=>{
+        req.body = {...req.body, [fieldname]:value}
+    })
     req.busboy.on('file', async function(fieldname, file, filename){
         filename = utf8Decode(filename.filename)
         file.pipe(cloudinary.uploader.upload_stream({folder:'images', public_id: filename},(err,result)=>{
@@ -22,8 +25,9 @@ const upload = function(req, res, next){
             else{
                 console.log('ok')
                 if (result){
-                    res.imageURL = result.url;
-                    next()
+                    req.body = {...req.body, imageURL: result.url}
+                    next();
+                    // res.imageURL = result.url;
                 }
             }
         }))
@@ -34,7 +38,6 @@ const upload = function(req, res, next){
             console.log('에러발생')
             console.log(err)
         })
-        
 
     });
 }
