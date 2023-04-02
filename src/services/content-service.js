@@ -1,8 +1,10 @@
 import { contentModel } from '../db/index.js'
+import { createClient } from 'redis';
 
 class ContentService{
-    constructor(contentModel){
+    constructor(contentModel, createClient){
         this.contentModel = contentModel;
+        this.createClient = createClient
     }
 
     async addContent(contentInfo){
@@ -28,9 +30,24 @@ class ContentService{
         const result = await this.contentModel.deleteContent(contentInfo);
         return result;
     }
+    async updateCacheRankData(){
+        try{
+            const rankData = await this.contentModel.getRankContents();
+            const client = this.createClient();
+            await client.connect();
+            let rank = 1;
+            rankData.forEach(data=>{
+                client.set(`rank${rank}`,JSON.stringify(data))
+                rank++;
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 }
 
 
-const contentService = new ContentService(contentModel);
+const contentService = new ContentService(contentModel, createClient);
 
 export default contentService;

@@ -71,6 +71,14 @@ export class ContentModel{
             return err;
         }
     }
+
+    async getRankContents(){
+        const connection = new pg.Client(this.conenctionInfo)
+        await connection.connect();
+        const result = await connection.query(`select * from contents order by count limit 12;`);
+        await connection.end();
+        return result.rows;
+    }
 }
 
 const contentModel = new ContentModel(connectionInfo);

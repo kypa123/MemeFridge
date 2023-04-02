@@ -18,7 +18,8 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.16",
-    "pg": "^8.8.0"
+    "pg": "^8.8.0",
+    "redis": "^4.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
