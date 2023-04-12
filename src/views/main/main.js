@@ -12,10 +12,12 @@ async function loadMainContent(){
             result.rows.forEach(el=>{
                 row.innerHTML += `
             <div class="content">
-                <figure class="image is-128x128">
-                    <img class="content-img" src="${el.url}">
-                </figure>
-                    <p>${el.title}</p>
+                <a href="/detail/${el.id}">
+                    <figure>
+                        <img class="content-img" src="${el.url}">
+                        <p>${el.title}</p>
+                    </figure>    
+                </a>
             </div>`
             });
             container.appendChild(row);

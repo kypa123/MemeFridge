@@ -1,11 +1,24 @@
 .row{
     display: flex;
+    margin-left: 1vh;
+    margin-right: 1vh;
 }
 
-
+.container{
+    margin-top: 80px;
+}
 .content{
     text-align: center;
-    margin: auto;
+    margin-left: auto;
+    margin-right: 20px;
 }
-/* .row:last-child{
-} */
+
+.content-img{
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+}
+
+a{
+    color: inherit;
+}
