@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Detail</title>
+    <title>상세보기 페이지</title>
 
     <script src="detail.js" type="module"></script>
-    <link rel="stylesheet" href="detail.css">
+    <link rel="stylesheet" href="/detail/datail.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="../footer/footer.css"
-    <script src="../nav/nav.js"></script>
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/nav/nav.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
     <!-- navigation bar -->
     <div id="nav-placeholder"></div>
 
-
+    <!-- content detail -->
     <div id="content-container" class="container is-widescreen">
-        <img id ='detail-img'src="/images/smoking pepe.png">
+        <img id ='detail-img'>
 
     <p id="detail-desc">ㅎㅇㅎㅇ</p>
     </div>
 
-    
     <!-- footer -->
     <div id="footer-placeholder"></div>
-    <!-- footer -->
 
+    <!-- content modal -->
+    <div id="content-modal-placeholder"></div>
     
 </body>
-<!-- load nav, footer -->
 <script>
-    $(document).ready(function () {
-        $('#nav-placeholder').load('../nav/nav.html');
-        $('#footer-placeholder').load('../footer/footer.html');
-    });
+    $('#content-modal-placeholder').load('/content-modal/content-modal.html');
+    $('#nav-placeholder').load('/nav/nav.html');
+    $('#footer-placeholder').load('/footer/footer.html');
 </script>
+<script src="/content-modal/content-modal.js" type="module" defer></script>
 </html>
