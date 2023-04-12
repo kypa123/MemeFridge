@@ -12,7 +12,7 @@ viewsRouter.use('/footer',serveStatic('footer'))
 viewsRouter.use('/content-modal',serveStatic('content-modal'))
 viewsRouter.use('/main', serveStatic('main'));
 viewsRouter.use('/images', serveStatic('images'))
-viewsRouter.use('/detail', serveStatic('detail'))
+viewsRouter.use('/detail/:id', serveStatic('detail'))
 viewsRouter.use('/register', serveStatic('register'));
 
 

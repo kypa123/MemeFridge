@@ -18,6 +18,10 @@ class ContentService{
         return result;
     }
 
+    async findById(id){
+        const result = await this.contentModel.findByContentId(id);
+        return result;
+    }
 
     async updateContent(contentInfo){
         const result = await this.contentModel.updateContent(contentInfo);

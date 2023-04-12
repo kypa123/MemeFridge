@@ -36,7 +36,6 @@ export class ContentModel{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(`select * from contents where id=${contentId}`)
-            console.log(result)
             await connection.end()
             return result;
         }
