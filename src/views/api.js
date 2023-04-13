@@ -1,18 +1,11 @@
 async function get(endpoint, params = '') {
     const apiUrl = `${endpoint}/${params}`;
 
-    const res = await fetch(apiUrl, {
-
-        // headers: {
-        //     Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-        // },
-    });
-
+    const res = await fetch(apiUrl);
     // 응답 코드가 4XX 계열일 때 (400, 403 등)
     if (!res.ok) {
         const errorContent = await res.json();
         const { reason } = errorContent;
-
         throw new Error(reason);
     }
 
