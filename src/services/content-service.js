@@ -20,7 +20,7 @@ class ContentService{
         return result;
     }
 
-    async findById(id){
+    async findByContentId(id){
         const result = await this.contentModel.findByContentId(id);
         return result;
     }
