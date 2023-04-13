@@ -15,6 +15,18 @@ contentRouter.get('/', async function(req, res, next){
     }
 });
 
+contentRouter.get('/:id', async function(req, res, next){
+    try{
+        const id = req.params.id;
+        const result = await contentService.findByContentId(id);
+        console.log(result.rows[0]);
+        res.json(result.rows[0]);
+    }
+    catch(err){
+        next(err)
+    }
+});
+
 contentRouter.post('/', upload, async function(req, res, next){
     try{
         const {name, desc, imageURL} = req.body;
@@ -25,5 +37,6 @@ contentRouter.post('/', upload, async function(req, res, next){
         next(err)
     }
 });
+
 
 export default contentRouter;
