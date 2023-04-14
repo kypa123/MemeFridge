@@ -35,7 +35,7 @@ export class ContentModel{
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(`select * from contents where id=${contentId}`)
+            const result = await connection.query(`update contents set count = count + 1 where id=${contentId} returning *;`);
             await connection.end()
             return result;
         }
