@@ -3,7 +3,7 @@ import * as Api from '/api.js';
 
 const desc = document.getElementById('detail-desc');
 const img = document.getElementById('detail-img')
-
+const title = document.getElementById('detail-title');
 
 async function dataInsert(){
     try{
@@ -11,7 +11,8 @@ async function dataInsert(){
         const result = await Api.get(`/contents/${contentId}`);
         if (result){
             console.log(result)
-            desc.innerText = result.title
+            title.innerText = result.title
+            desc.innerText = result.description
             img.src = result.url;
         }
         else{
