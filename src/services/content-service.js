@@ -44,8 +44,23 @@ class ContentService{
                 client.set(`rank${rank}`,JSON.stringify(data))
                 rank++;
             })
+            return;
         }
         catch(err){
+            console.log(err)
+        }
+    }
+
+    async getCacheRankData(){
+        try{
+            const client = this.createClient();
+            await client.connect();
+            let result = []
+            for(let i = 1; i<13; i++){;
+                result.push({rank: i, ...JSON.parse(await client.get(`rank${i}`))})
+            }
+            return result;
+        }catch(err){
             console.log(err)
         }
     }
