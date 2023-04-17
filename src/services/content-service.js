@@ -56,7 +56,7 @@ class ContentService{
             const client = this.createClient();
             await client.connect();
             let result = []
-            for(let i = 1; i<13; i++){;
+            for(let i = 1; i<5; i++){;
                 result.push({rank: i, ...JSON.parse(await client.get(`rank${i}`))})
             }
             return result;
