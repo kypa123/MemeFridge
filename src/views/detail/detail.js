@@ -8,7 +8,7 @@ const title = document.getElementById('detail-title');
 async function dataInsert(){
     try{
         const contentId = location.pathname.split('/')[2];
-        const result = await Api.get(`/contents/${contentId}`);
+        const result = await Api.get('/contents/id',`?id=${contentId}`);
         if (result){
             console.log(result)
             title.innerText = result.title

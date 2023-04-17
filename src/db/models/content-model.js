@@ -74,7 +74,7 @@ export class ContentModel{
     async getRankContents(){
         const connection = new pg.Client(this.conenctionInfo)
         await connection.connect();
-        const result = await connection.query(`select * from contents order by count limit 12;`);
+        const result = await connection.query(`select * from contents order by count desc limit 4;`);
         await connection.end();
         return result.rows;
     }

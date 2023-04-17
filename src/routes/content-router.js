@@ -29,6 +29,7 @@ contentRouter.get('/id', async function(req, res, next){
     try{
         const id = req.query.id;
         const result = await contentService.findByContentId(id);
+        await contentService.updateCacheRankData();
         console.log(result.rows[0]);
         res.json(result.rows[0]);
     }
