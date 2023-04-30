@@ -1,14 +1,18 @@
-#content-container{
-    text-align: center;
-    margin-top: 80px;
+#content-container {
+  text-align: center;
+  margin-top: 80px;
 }
 
-#detail-title{
-    margin-bottom: 20px;
-    font-size: 20px;
+#detail-title {
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
-img{
-    max-width: 500px;
-    max-height: 500px;
+img {
+  max-width: 450px;
+  max-height: 450px;
+}
+span{
+  margin-left: 2px;
+  margin-right: 2px;
 }

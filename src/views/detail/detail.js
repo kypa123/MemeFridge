@@ -11,12 +11,15 @@ async function dataInsert(){
         const result = await Api.get('/contents/id',`?id=${contentId}`);
         if (result){
             console.log(result)
-            title.innerText = result.title
-            desc.innerText = result.description
+            title.innerText = result.title || result.tag
             img.src = result.url;
-        }
-        else{
-            desc.innerText = '없는 유저'
+            const tags = result.tag.split(" ")
+            tags.forEach(t =>{
+                const span = document.createElement('span')
+                span.className = "tag is-primary";
+                span.innerText = t;
+                desc.appendChild(span);
+            })
         }
     }
     catch(err){
