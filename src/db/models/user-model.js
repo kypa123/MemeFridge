@@ -7,11 +7,12 @@ class UserModel{
         this.connectionInfo = connectionInfo
     }
     
-    async findUser(name){
+    async findUser(userInfo){
         try{
+            const { name, email } = userInfo
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
-            const result = await connection.query(`select * from users where name='${name}'`);
+            const result = await connection.query(`select * from users where name='${name}' or email='${email}'`);
             await connection.end()
             return result
         }
@@ -24,7 +25,7 @@ class UserModel{
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
-            const result = await connection.query(`insert into users (name, password,email) values ('${userInfo.name}','${userInfo.password}','${userInfo.email}');`);
+            const result = await connection.query(`insert into users (name, password,email) values ('${userInfo.name}','${userInfo.hashedPassword}','${userInfo.email}');`);
             await connection.end()
             return result;
         }
