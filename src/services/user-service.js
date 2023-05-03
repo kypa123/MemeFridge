@@ -7,18 +7,33 @@ class UserService{
     }
 
     async addUser(userInfo){
-        const {id, password, email} = userInfo
-        const user = await this.userModel.findUser(id);
-        if (user){
-            throw new Error(
-                '이미 존재하는 아이디입니다'
-            );
-        }
-        const hashedPassword = await bcrypt.hash(password, 10)
-        const newUser = await this.userModel.addUser({id, hashedPassword, email});
-        console.log(newUser);
-        return newUser
+        try{
+            const {name, email, password} = userInfo
+            const result = await this.userModel.findUser({name, email});
 
+            if (result.rowCount > 0){
+                const user = result.rows[0]
+                console.log(user)
+                let message = ''
+                if (user.name == name){
+                    console.log('이미 존재하는 아이디')
+                    message = '이미 존재하는 아이디입니다.'
+                }
+                else{
+                    console.log('이미 존재하는 이메일')
+                    message = '이미 존재하는 이메일입니다.'
+                }
+                return {message}
+            }
+            else{
+                const hashedPassword = await bcrypt.hash(password, 10)
+                const newUser = await this.userModel.addUser({name, hashedPassword, email});
+                return newUser
+            }
+        }
+        catch(err){
+            return err
+        }
     }
 
     async findUser(userName){
