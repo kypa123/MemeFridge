@@ -17,32 +17,23 @@ async function get(endpoint, params = '') {
 // api 로 POST 요청 (/endpoint 로, JSON 데이터 형태로 요청함)
 async function post(endpoint, data) {
     const apiUrl = endpoint;
-    // JSON.stringify 함수: Javascript 객체를 JSON 형태로 변환함.
-    // 예시: {name: "Kim"} => {"name": "Kim"}
-    console.log('1차')
     const bodyData = JSON.stringify(data);
-    console.log('2차')
-    console.log(bodyData)
     const res = await fetch(apiUrl, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${document.cookie}`,
+        headers : {
+            'Content-Type': 'application/json'
         },
         body: bodyData,
     });
-
     // 응답 코드가 4XX 계열일 때 (400, 403 등)
-    if (!res.ok) {
-        const errorContent = await res.json();
-        const { reason } = errorContent;
+    // if (!res.ok) {
+    //     const errorContent = await res.json();
+    //     const { reason } = errorContent;
 
-        throw new Error(reason);
-    }
+    //     throw new Error(reason);
+    // }
 
-    const result = await res.json();
-
-    return result;
+    return await res.json();
 }
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)
