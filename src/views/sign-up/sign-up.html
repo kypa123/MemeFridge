@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <script src="./sign-up.js" type="module"></script>
+    <link rel="stylesheet" href="./sign-up.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="/footer/footer.css">
+    <script src="/nav/nav.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+    <!-- navigation bar -->
+    <div id="nav-placeholder"></div>
+
+    <div id="sign-up-form-container">
+        
+        <form class="sign-up-form box">
+            <div class="sign-up-greeting-container">
+                <h1 class="sign-up-greeting">회원가입</h1>
+            </div>
+
+            <div class="field">
+              <label class="label">아이디</label>
+              <p class="control has-icons-left">
+                <input class="input" id="id-input" type="text" placeholder="아이디를 입력해주세요" autocomplete="on">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+              </p>
+            </div>
+
+            <div class="field">
+              <label class="label">이메일</label>
+              <p class="control has-icons-left">
+                <input class="input" id="email-input" type="email" placeholder="abcd@example.com" autocomplete="on">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+              </p>
+            </div>
+          
+            <div class="field">
+              <label class="label">비밀번호</label>
+                <p class="control has-icons-left">
+                <input class="input" id="password-input" type="password" placeholder="********" autocomplete="off">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </p>
+            </div>
+          
+            <button id="sign-up-submit-button" class="button is-primary" type="submit">가입하기</button>
+        </form>
+    </div>
+
+
+    <!-- footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- content modal -->
+    <div id="content-modal-placeholder"></div>
+    
+</body>
+<script>
+    $('#content-modal-placeholder').load('/content-modal/content-modal.html');
+    $('#nav-placeholder').load('/nav/nav.html');
+    $('#footer-placeholder').load('/footer/footer.html');
+</script>
+<script src="/content-modal/content-modal.js" type="module" defer></script>
+</html>

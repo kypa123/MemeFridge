@@ -1,0 +1,40 @@
+#sign-up-form-container {
+    height: 60vh;
+    text-align: center;    
+    margin-top: 8%;
+  }
+
+.sign-up-form .sign-up-greeting {
+    text-align: center;
+    font-size: 30px;
+    color: #4a4f5a;
+    margin-top: 2vh;
+}
+.sign-up-form{
+    width: 28rem;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.sign-up-form .input:focus {
+    border-color: hsl(171,100%,41%);
+    box-shadow: 0 0 0 0.125em hsl(171, 100%, 43%);
+}
+
+
+.sign-up-form .field {
+    display: flex;
+    margin-top: 20px;
+}
+
+.sign-up-form .label {
+    width: 100px;
+    margin-right: 30px;
+    margin-top: 10px;
+    color: #4a4f5a;
+}
+
+
+#sign-up-submit-button{
+    margin-top: 5vh;
+}
