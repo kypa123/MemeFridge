@@ -13,8 +13,14 @@ userRouter.get('/', async function(req, res, next){
     }
 })
 
-userRouter.post('/',async function(req, res, next){
-    const { name, password, email } = req.body;
+userRouter.post('/', async function(req, res, next){
+    try{
+        const result = await userService.addUser(req.body)
+        res.json(result)
+    }
+    catch(err){
+        next(err)
+    }
 })
 
 export default userRouter
