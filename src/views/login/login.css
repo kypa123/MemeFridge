@@ -1,0 +1,40 @@
+#login-form-container {
+    height: 60vh;
+    text-align: center;    
+    margin-top: 8%;
+  }
+
+.login-form .login-greeting {
+    text-align: center;
+    font-size: 30px;
+    color: #4a4f5a;
+    margin-top: 2vh;
+}
+.login-form{
+    width: 28rem;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.login-form .input:focus {
+    border-color: hsl(171,100%,41%);
+    box-shadow: 0 0 0 0.125em hsl(171, 100%, 43%);
+}
+
+
+.login-form .field {
+    display: flex;
+    margin-top: 20px;
+}
+
+.login-form .label {
+    width: 100px;
+    margin-right: 30px;
+    margin-top: 10px;
+    color: #4a4f5a;
+}
+
+
+#login-submit-button{
+    margin-top: 5vh;
+}
