@@ -25,10 +25,14 @@ async function handleSubmit(e){
 
     try{
         const data = { email, password };
-        const result = await Api.get('/users',data)
-        if (result){
+        const result = await Api.post('/users/auth',data)
+        console.log(result);
+        if (result.status == 'success'){
             alert('로그인 ok')
             window.location.href='http://localhost:3000/main';
+        }
+        else{
+            alert(result.message)
         }
     }
     catch(err){
