@@ -1,5 +1,6 @@
-import { userModel } from '../db/index.js'
+import { userModel } from '../db/index.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 class UserService{
     constructor(userModel){
@@ -60,6 +61,34 @@ class UserService{
     async deleteUser(userId){
         const result = await this.userModel.deleteUser(userId);
         return result;
+    }
+
+    async login(userInfo){
+        try{
+            console.log(userInfo)
+            const result = await this.userModel.findUser(userInfo);
+            if(result.rowCount > 0){
+                const user = result.rows[0]
+                if (bcrypt.compare(userInfo.password, user.password)){
+                    console.log('ok')
+
+                    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+                    console.log('secret: ',secretKey)
+                    const jwtToken = jwt.sign({name:user.name, email:user.email}, secretKey)
+                    console.log(jwtToken)
+                    return {status:'success', body: jwtToken}
+                }
+                else{
+                    return {status: 'error', message: '패스워드가 옳지 않습니다!'}
+                }
+            }
+            else{
+                return {status:'error', message:'해당하는 아이디가 존재하지 않습니다!'}
+            }
+        }
+        catch(err){
+            return err;
+        }
     }
 }
 
