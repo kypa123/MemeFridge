@@ -9,7 +9,8 @@ class UserModel{
     
     async findUser(userInfo){
         try{
-            const { name, email } = userInfo
+            const name = userInfo.name || ''
+            const email = userInfo.email || ''
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
             const result = await connection.query(`select * from users where name='${name}' or email='${email}'`);
