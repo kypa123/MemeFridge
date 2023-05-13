@@ -7,19 +7,22 @@ const rankContainer = document.getElementById('rank-contents');
 async function loadRankContent(){
     try{
         const result = await Api.get('/contents','/rank');
-        console.log('main.js까지 무사히 도착완료.')
-        const row = document.createElement('div')
+        const row = document.createElement('div');
         row.className = "row"
         result.forEach(el=>{
+            let tag = ''
+            el.tag.split(" ").slice(0,3).forEach(t=>{
+                tag += `<span class="tag is-primary" style="padding: 10px; font-weight:bold;">${t}</span>`
+            })
             row.innerHTML += `
-        <div class="content">
-            <a href="/detail/${el.id}">
-                <figure>
+            <div class="content" style="position: relative">
+                <a href="/detail/${el.id}">
                     <img class="content-img" src="${el.url}">
-                    <p>${el.title}</p>
-                </figure>    
-            </a>
-        </div>`
+                </a>
+                <div class="content-tags">
+                    ${tag}
+                </div>
+            </div>`
         });
         rankContainer.appendChild(row)
     }
@@ -36,15 +39,19 @@ async function loadMainContent(){
             const row = document.createElement('div')
             row.className = "row"
             result.rows.forEach(el=>{
+                let tag = ''
+                el.tag.split(" ").slice(0,3).forEach(t=>{
+                    tag += `<span class="tag is-primary" style="padding: 10px; font-weight:bold;">${t}</span>`
+                })
                 row.innerHTML += `
-            <div class="content">
-                <a href="/detail/${el.id}">
-                    <figure>
+                <div class="content" style="position: relative">
+                    <a href="/detail/${el.id}">
                         <img class="content-img" src="${el.url}">
-                        <p>${el.title}</p>
-                    </figure>    
-                </a>
-            </div>`
+                    </a>
+                    <div class="content-tags">
+                        ${tag}
+                    </div>
+                </div>`
             });
             container.appendChild(row);
             ++offset
