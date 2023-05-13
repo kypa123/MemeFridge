@@ -33,6 +33,7 @@ userRouter.post('/auth', async function(req, res, next){
                 expires: new Date(Date.now + 600),
                 httpOnly: true,
             })
+            .cookie('isLoggedIn',1)
             .status(200)
             .json(result)
         }
