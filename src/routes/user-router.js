@@ -27,7 +27,7 @@ userRouter.post('/', async function(req, res, next){
 userRouter.get('/auth', isLoggedIn, async function(req,res,next){
     try{
         const loginInfo = req.tokenInfo;
-        console.log(loginInfo);
+        res.json(loginInfo);
     }
     catch(err){
         next(err)
