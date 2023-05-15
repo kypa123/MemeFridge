@@ -70,10 +70,8 @@ class UserService{
             if(result.rowCount > 0){
                 const user = result.rows[0]
                 if (bcrypt.compare(userInfo.password, user.password)){
-                    console.log('ok')
 
                     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-                    console.log('secret: ',secretKey)
                     const jwtToken = jwt.sign({name:user.name, email:user.email}, secretKey)
                     console.log(jwtToken)
                     return {status:'success', body: jwtToken}
