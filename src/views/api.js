@@ -1,14 +1,6 @@
 async function get(endpoint, params = '') {
     const apiUrl = `${endpoint}/${params}`;
-
     const res = await fetch(apiUrl);
-    // 응답 코드가 4XX 계열일 때 (400, 403 등)
-    if (!res.ok) {
-        const errorContent = await res.json();
-        const { reason } = errorContent;
-        throw new Error(reason);
-    }
-
     const result = await res.json();
 
     return result;
@@ -25,13 +17,6 @@ async function post(endpoint, data) {
         },
         body: bodyData,
     });
-    // 응답 코드가 4XX 계열일 때 (400, 403 등)
-    // if (!res.ok) {
-    //     const errorContent = await res.json();
-    //     const { reason } = errorContent;
-
-    //     throw new Error(reason);
-    // }
 
     return await res.json();
 }

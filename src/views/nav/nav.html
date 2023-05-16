@@ -1,32 +1,39 @@
-<nav class="navbar has-shadow is-transparent is-primary">
+<nav class="navbar has-shadow is-transparent">
     <div class="navbar-brand">
-      <a class="navbar-item" href="http://localhost:3000/main/">
-        <img src="/images/fridge.svg" alt="failed to load images" width="80" height="150">
+      <a class="navbar-item" href="http://localhost:3000/main/" id="main-logo-container">
+        <img src="/images/fridge.svg" alt="failed to load images" width="100%">
       </a>
     </div>
-  
+
     <div id="main-navbar" class="navbar-menu">    
+
+      <form id="search">
+        <input class="input is-primary is-focused" type="text" placeholder="검색">
+        <button class="button is-secondary" type="submit">검색</button>
+      </form>
+
       <div class="navbar-end">
         <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control">
-              <a class="button is-dark">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-                <span>
-                  로그인
-                </span>
-              </a>
-            </p>
-            <p class="control">
-              <button class="button is-white" id= 'content-upload-modal-button' data-target="content-upload-modal">
-                <span class="icon">
-                  <i class="fas fa-plus"></i>
-                </span>
-                <span>추가하기</span>
-              </button>
-            </p>
+          <p class="control">
+            <button class="button is-white" id= 'content-upload-modal-button' data-target="content-upload-modal">
+              <span class="icon">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span>추가하기</span>
+            </button>
+          </p>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <span>
+              회원
+            </span>
+          </a>
+          <div class="navbar-dropdown" id="navbar-auth">
+            
           </div>
         </div>
       </div>

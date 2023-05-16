@@ -1,0 +1,12 @@
+#main-logo-container{
+    margin-left: 1vh;
+}
+
+#search{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
