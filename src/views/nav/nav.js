@@ -1,15 +1,44 @@
 import * as Api from '../api.js';
 
-const userNav = document.getElementById("auth")
+const userNav = document.getElementById("navbar-auth")
 
 async function navbarEndUserInfo(){
-    const result = await Api.get('/auth')
-    if(result.status == 404){
-        userNav.innerHTML = `<a class="navbar-item" href="/sign-up">회원가입</a>
-        <a class="navbar-item" href="/login">로그인</a>`
+    console.log('내비게이션 바')
+    const result = await Api.get('/users','auth')
+    
+    console.log(result);
+    
+    if(result.statusCode == 403){
+        const signUpTag = document.createElement('a');
+        const loginTag = document.createElement('a');
+        signUpTag.className = loginTag.className= "navbar-item";
+        signUpTag.href = "/sign-up";
+        loginTag.href = "/login";
+        signUpTag.innerText = "회원가입";
+        loginTag.innerText = "로그인";
+        userNav.appendChild(signUpTag)
+        userNav.appendChild(loginTag)
     }
     else{
-        userNav.innerHTML = `<a class="navbar-item" href='/userPage</a>`
+        const userPageTag = document.createElement('a');
+        const logoutTag = document.createElement('a');
+        userPageTag.className = "navbar-item";
+        userPageTag.href = "/userPage"
+        userPageTag.innerHTML = `<span class="icon">
+        <i class="fas fa-user-o"></i>
+      </span>
+      <span>
+        마이페이지
+      </span>`
+        logoutTag.className = "navbar-item";
+        logoutTag.href = "/users/auth";
+        logoutTag.innerHTML = `<span class="icon">
+        <i class="fas fa-user-o"></i>
+      </span>
+      <span>
+        로그아웃
+      </span>`
+        userNav.appendChild(userPageTag)
     }
 }
 
