@@ -42,7 +42,6 @@ userRouter.post('/auth', async function(req, res, next){
         console.log(result)
         if(result.status == 'success'){
             res.cookie('token', result.body,{
-                expires: new Date(Date.now + 600),
                 httpOnly: true,
             })
             .status(200)
