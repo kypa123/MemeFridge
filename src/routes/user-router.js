@@ -26,13 +26,14 @@ userRouter.post('/', async function(req, res, next){
 
 userRouter.get('/auth', isLoggedIn, async function(req,res,next){
     try{
-        const loginInfo = req.tokenInfo;
-        res.json(loginInfo);
+        const userInfo = req.tokenInfo
+        res
+        .status(200)
+        .json(userInfo)
     }
     catch(err){
         next(err)
     }
-    // req.cookie를 받아서, 서버에서 해당 토큰이 유효한지 확인, 유효하다면 success 200 리턴
 })
 
 userRouter.post('/auth', async function(req, res, next){
@@ -41,7 +42,6 @@ userRouter.post('/auth', async function(req, res, next){
         console.log(result)
         if(result.status == 'success'){
             res.cookie('token', result.body,{
-                expires: new Date(Date.now + 600),
                 httpOnly: true,
             })
             .status(200)
@@ -62,6 +62,7 @@ userRouter.delete('/auth',async function(req, res, next){
     try{
         res.clearCookie("token")
         .status(200)
+        .redirect('/')
     }
     catch(err){
         next(err)

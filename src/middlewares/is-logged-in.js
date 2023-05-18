@@ -12,12 +12,18 @@ async function isLoggedIn(req, res, next) {
     }
     
     try{
-        req.tokenInfo = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const tokenInfo = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        console.log('정상적으로 토큰을 인식하였습니다')
+        console.log(tokenInfo)
+        req.tokenInfo = tokenInfo;
+        next();
     }
     catch(err){
             req.tokenInfo = err.message
+            console.log('토큰이 만료됐거나 문제가있습니다.')
+            console.log(err.message)
+            next();
         }
-    next();
 }
 
 export default isLoggedIn;
