@@ -77,7 +77,7 @@ class UserService{
                         }, 
                         secretKey,
                         {
-                            expiresIn: process.env.EXPIRE_DATE
+                            expiresIn: process.env.JWT_EXPIRE_DATE
                     })
                     return {status:'success', body: jwtToken}
                 }
