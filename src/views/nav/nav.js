@@ -1,12 +1,10 @@
 import * as Api from '../api.js';
 
-const userNav = document.getElementById("navbar-auth")
 
 async function navbarEndUserInfo(){
     console.log('내비게이션 바')
     const result = await Api.get('/users','auth')
-    
-    console.log(result);
+    const userNav = document.getElementById("navbar-auth")
     
     if(result.statusCode == 403){
         const signUpTag = document.createElement('a');
@@ -41,9 +39,10 @@ async function navbarEndUserInfo(){
         userNav.appendChild(userPageTag);
         userNav.appendChild(logoutTag);
         logoutTag.addEventListener('click',async function(){
-            fetch('/users/auth',{
-            method:'DELETE'
-          }).then(res => alert(res))
+          const result = await Api.post('/users/logout');
+          if(result.message == "ok"){
+            window.location.href= '/main';
+          }
         })
     }
 }
