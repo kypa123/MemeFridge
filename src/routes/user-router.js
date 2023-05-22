@@ -42,7 +42,6 @@ userRouter.post('/auth', async function(req, res, next){
         console.log(result)
         if(result.status == 'success'){
             res.cookie('token', result.body,{
-                expires: new Date(Date.now + 600),
                 httpOnly: true,
             })
             .status(200)
@@ -59,11 +58,10 @@ userRouter.post('/auth', async function(req, res, next){
     }
 })
 
-userRouter.delete('/auth',async function(req, res, next){
+userRouter.post('/logout', async function(req, res, next){
     try{
-        res.clearCookie("token")
-        .status(200)
-        .redirect('/')
+        const message = {message: "ok"}
+        res.clearCookie('token').json(message)
     }
     catch(err){
         next(err)

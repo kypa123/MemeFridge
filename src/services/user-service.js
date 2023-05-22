@@ -72,8 +72,13 @@ class UserService{
                 if (bcrypt.compare(userInfo.password, user.password)){
 
                     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-                    const jwtToken = jwt.sign({name:user.name, email:user.email}, secretKey)
-                    console.log(jwtToken)
+                    const jwtToken = jwt.sign({
+                        name:user.name, email:user.email
+                        }, 
+                        secretKey,
+                        {
+                            expiresIn: process.env.JWT_EXPIRE_DATE
+                    })
                     return {status:'success', body: jwtToken}
                 }
                 else{

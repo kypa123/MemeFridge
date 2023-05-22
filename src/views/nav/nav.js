@@ -1,12 +1,10 @@
 import * as Api from '../api.js';
 
-const userNav = document.getElementById("navbar-auth")
 
 async function navbarEndUserInfo(){
     console.log('내비게이션 바')
     const result = await Api.get('/users','auth')
-    
-    console.log(result);
+    const userNav = document.getElementById("navbar-auth")
     
     if(result.statusCode == 403){
         const signUpTag = document.createElement('a');
@@ -16,13 +14,13 @@ async function navbarEndUserInfo(){
         loginTag.href = "/login";
         signUpTag.innerText = "회원가입";
         loginTag.innerText = "로그인";
-        userNav.appendChild(signUpTag)
-        userNav.appendChild(loginTag)
+        userNav.appendChild(signUpTag);
+        userNav.appendChild(loginTag);
     }
     else{
         const userPageTag = document.createElement('a');
         const logoutTag = document.createElement('a');
-        userPageTag.className = "navbar-item";
+        userPageTag.className = logoutTag.className = "navbar-item";
         userPageTag.href = "/userPage"
         userPageTag.innerHTML = `<span class="icon">
         <i class="fas fa-user-o"></i>
@@ -30,15 +28,22 @@ async function navbarEndUserInfo(){
       <span>
         마이페이지
       </span>`
-        logoutTag.className = "navbar-item";
-        logoutTag.href = "/users/auth";
+
         logoutTag.innerHTML = `<span class="icon">
         <i class="fas fa-user-o"></i>
       </span>
       <span>
         로그아웃
       </span>`
-        userNav.appendChild(userPageTag)
+        
+        userNav.appendChild(userPageTag);
+        userNav.appendChild(logoutTag);
+        logoutTag.addEventListener('click',async function(){
+          const result = await Api.post('/users/logout');
+          if(result.message == "ok"){
+            window.location.href= '/main';
+          }
+        })
     }
 }
 
