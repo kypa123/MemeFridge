@@ -56,3 +56,12 @@ a{
     transform: translate( -50%, -50% ); 
     display: flex;
 }
+
+.content .content-tags .tag{
+    color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 3px;
+    background-color: #2e6b6a;
+}

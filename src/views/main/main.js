@@ -12,7 +12,7 @@ async function loadRankContent(){
         result.forEach(el=>{
             let tag = ''
             el.tag.split(" ").slice(0,3).forEach(t=>{
-                tag += `<span class="tag is-primary" style="padding: 10px; font-weight:bold;">${t}</span>`
+                tag += `<span class="tag">${t}</span>`
             })
             row.innerHTML += `
             <div class="content" style="position: relative">
@@ -41,7 +41,7 @@ async function loadMainContent(){
             result.rows.forEach(el=>{
                 let tag = ''
                 el.tag.split(" ").slice(0,3).forEach(t=>{
-                    tag += `<span class="tag is-primary" style="padding: 10px; font-weight:bold;">${t}</span>`
+                    tag += `<span class="tag">${t}</span>`
                 })
                 row.innerHTML += `
                 <div class="content" style="position: relative">
