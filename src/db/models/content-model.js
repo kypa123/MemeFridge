@@ -57,6 +57,20 @@ export class ContentModel{
         }
     }
 
+    async findByTags(tags){
+        try{
+            const connection = new pg.Client(this.connectionInfo);
+            await connection.connect();
+            let query = 'select * from contents where ';
+            const string = tags.reduce((acc,curr) => acc + "tag like " + "'%" + curr + "%' and ", '');
+            query += string
+            query = query.slice(0,-5);
+            const result = await connection.query(query);
+            await connection.end();
+            return result;
+        }
+    }
+
     async addContent(contentInfo){
         try{
             const {name, desc, url} = contentInfo;
