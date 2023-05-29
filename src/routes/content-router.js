@@ -44,8 +44,7 @@ contentRouter.post('/', upload, async function(req, res, next){
     try{
         const {name, tag, imageURL} = req.body;
         const result = await contentService.addContent({name, tag, url:imageURL})
-        console.log(result);
-        res.json({ok})
+        res.json(result)
     }
     catch(err){
         next(err)
