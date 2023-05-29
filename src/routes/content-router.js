@@ -53,9 +53,9 @@ contentRouter.get('/tags', async function(req, res, next){
 
 contentRouter.post('/', upload, async function(req, res, next){
     try{
-        const {name, desc, imageURL} = req.body;
-        const result = await contentService.addContent({name, desc, url:imageURL})
-        res.json({ok})
+        const {name, tag, imageURL} = req.body;
+        const result = await contentService.addContent({name, tag, url:imageURL})
+        res.json(result)
     }
     catch(err){
         next(err)

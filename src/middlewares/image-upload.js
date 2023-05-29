@@ -18,7 +18,7 @@ const upload = function(req, res, next){
     })
     req.busboy.on('file', async function(fieldname, file, filename){
         filename = utf8Decode(filename.filename)
-        file.pipe(cloudinary.uploader.upload_stream({folder:'images', public_id: filename},(err,result)=>{
+        file.pipe(cloudinary.uploader.upload_stream({folder:'images'},(err,result)=>{
             if (err){
                 console.log(err)
             }
