@@ -1,5 +1,7 @@
 import * as Api from '../api.js';
 
+const searchButton = document.getElementById('search-submit-button')
+
 
 async function navbarEndUserInfo(){
     console.log('내비게이션 바')
@@ -46,5 +48,11 @@ async function navbarEndUserInfo(){
         })
     }
 }
+
+async function searchExecute(e){
+  e.preventDefault();
+  
+}
+
 
 navbarEndUserInfo();
