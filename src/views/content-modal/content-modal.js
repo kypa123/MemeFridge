@@ -55,12 +55,10 @@ async function register(e){
     //   console.log(key, value);
     // }
     console.log('ㅎㅇㅎㅇ')
-    const result = await fetch('/contents',{
-      method:'POST',
-      body:form
-    })
+    const result = await Api.post('/contents',form, 'meme')
     if(result){
-      window.location.reload();
+      alert("업로드 완료!")
+      window.location.href="/main"
     }
   }
   catch(err){
@@ -68,5 +66,5 @@ async function register(e){
   }
 }
 
-const myForm = document.querySelector('form')
+const myForm = document.getElementById('content-upload-form')
 myForm.addEventListener('submit',register);

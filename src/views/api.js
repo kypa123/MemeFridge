@@ -7,18 +7,27 @@ async function get(endpoint, params = '') {
 }
 
 // api 로 POST 요청 (/endpoint 로, JSON 데이터 형태로 요청함)
-async function post(endpoint, data) {
+async function post(endpoint, data, contentType = '') {
     const apiUrl = endpoint;
-    const bodyData = JSON.stringify(data);
-    const res = await fetch(apiUrl, {
-        method: 'POST',
-        headers : {
-            'Content-Type': 'application/json'
-        },
-        body: bodyData,
-    });
+    if(contentType == "meme"){
+        const res = await fetch(apiUrl, {
+            method: 'POST',
+            body: data,
+        });
+        return await res.json();
+    }
+    else{
+        const bodyData = JSON.stringify(data);
+        const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body: bodyData,
+        });
 
-    return await res.json();
+        return await res.json();
+    }
 }
 
 // api 로 PATCH 요청 (/endpoint/params 로, JSON 데이터 형태로 요청함)

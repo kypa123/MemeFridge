@@ -65,12 +65,11 @@ class UserService{
 
     async login(userInfo){
         try{
-            console.log(userInfo)
             const result = await this.userModel.findUser(userInfo);
             if(result.rowCount > 0){
                 const user = result.rows[0]
-                if (bcrypt.compare(userInfo.password, user.password)){
-
+                const res = await bcrypt.compare(userInfo.password, user.password)
+                if (res){
                     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
                     const jwtToken = jwt.sign({
                         name:user.name, email:user.email

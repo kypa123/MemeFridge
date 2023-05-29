@@ -58,11 +58,10 @@ userRouter.post('/auth', async function(req, res, next){
     }
 })
 
-userRouter.delete('/auth',async function(req, res, next){
+userRouter.post('/logout', async function(req, res, next){
     try{
-        res.clearCookie("token")
-        .status(200)
-        .redirect('/')
+        const message = {message: "ok"}
+        res.clearCookie('token').json(message)
     }
     catch(err){
         next(err)
