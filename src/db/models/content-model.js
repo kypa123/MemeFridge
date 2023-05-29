@@ -69,6 +69,9 @@ export class ContentModel{
             await connection.end();
             return result;
         }
+        catch(err){
+            return err;
+        }
     }
 
     async addContent(contentInfo){
