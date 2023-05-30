@@ -38,6 +38,16 @@ contentRouter.get('/id', async function(req, res, next){
     }
 });
 
+contentRouter.get('/tags', async function(req, res, next){
+    try{
+        const tags = req.query.tags.split("-");
+        const result = await contentService.findByTags(tags);
+        res.json(result)
+    }
+    catch(err){
+        next(err)
+    }
+})
 
 
 contentRouter.post('/', upload, async function(req, res, next){
