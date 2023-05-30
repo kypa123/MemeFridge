@@ -25,7 +25,7 @@ class ContentService{
         return result;
     }
 
-    async findBytags(tags){
+    async findByTags(tags){
         const result = await this.contentModel.findByTags(tags);
         return result;
     }
