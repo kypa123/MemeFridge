@@ -1,7 +1,5 @@
 import * as Api from '../api.js';
 
-const searchButton = document.getElementById('search-submit-button')
-
 
 async function navbarEndUserInfo(){
     console.log('내비게이션 바')
@@ -51,8 +49,20 @@ async function navbarEndUserInfo(){
 
 async function searchExecute(e){
   e.preventDefault();
-  
+  try{
+    const keywords = document.getElementById('search-input').value;
+    const query = keywords.replaceAll(' ','-');
+    console.log(query)
+    window.location.href=`/search/tags/${query}`
+  }
+  catch(err){
+    console.log(err)
+  }
 }
 
+window.onload = async function(){
+  const search = document.getElementById('search-container')
+  search.addEventListener('submit',searchExecute)
+  navbarEndUserInfo();
+}
 
-navbarEndUserInfo();
