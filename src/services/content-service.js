@@ -25,6 +25,11 @@ class ContentService{
         return result;
     }
 
+    async findByTags(tags){
+        const result = await this.contentModel.findByTags(tags);
+        return result;
+    }
+
     async updateContent(contentInfo){
         const result = await this.contentModel.updateContent(contentInfo);
         return result;
@@ -64,6 +69,8 @@ class ContentService{
             console.log(err)
         }
     }
+    
+    
 }
 
 

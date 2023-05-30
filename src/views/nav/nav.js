@@ -47,4 +47,24 @@ async function navbarEndUserInfo(){
     }
 }
 
-navbarEndUserInfo();
+async function searchExecute(e){
+  e.preventDefault();
+  try{
+    const keywords = document.getElementById('search-input').value;
+    const query = keywords.replaceAll(' ','-');
+    console.log(query)
+    window.location.href=`/search/tags/${query}`
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+window.onload = function(){
+  const search = document.getElementById('search-container')
+  if(search){
+    search.addEventListener('submit',searchExecute)
+  }
+  navbarEndUserInfo();
+}
+

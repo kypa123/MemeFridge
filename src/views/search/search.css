@@ -1,0 +1,46 @@
+.row{
+    display: flex;
+}
+
+.container{
+    margin-top: 100px;
+}
+
+.main-page-container{
+    align-items: center;
+    align-content: center;
+}
+
+#all-content-container{
+    margin: auto;
+    max-width: 980px;
+}
+
+.content{
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.content-img{
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border: 1px solid #eeeeee;
+    border-radius: 7px;
+}
+
+img{
+    vertical-align: middle;
+}
+a{
+    color: inherit;
+}
+
+.content-tags{
+    position: absolute; 
+    bottom: 5%;
+    left: 50%; 
+    transform: translate( -50%, -50% ); 
+    display: flex;
+}
