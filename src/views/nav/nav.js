@@ -60,9 +60,11 @@ async function searchExecute(e){
   }
 }
 
-window.onload = async function(){
+window.onload = function(){
   const search = document.getElementById('search-container')
-  search.addEventListener('submit',searchExecute)
+  if(search){
+    search.addEventListener('submit',searchExecute)
+  }
   navbarEndUserInfo();
 }
 
