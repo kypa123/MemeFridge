@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/footer/footer.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    
+    <script src="/nav/nav.js" type="module"></script>
+    <link rel="stylesheet" href="/nav/nav.css">
 </head>
 <body>
     <!-- navigation bar -->
@@ -24,56 +25,12 @@
     </div>
     <!-- footer -->
     <div id="footer-placeholder"></div>
-    <!-- content modal -->
-    <div id="content-modal-placeholder">
-      <div id="content-upload-modal" class="modal">
-        <div class="modal-background"></div>
-          <div class="modal-card">
-            <header class="modal-card-head">
-              <p class="modal-card-title" style="text-align: center;">컨텐츠 등록하기</p>
-              <button class="delete" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-              <!-- Content ... -->
-              <div class="content-upload">
-                  <form class="box" id="content-upload-form" enctype="multipart/form-data">
-                      <div class="field">
-                        <label class="label" for="content-img">
-                          <p>사진업로드</p>
-                          <input type="file" id="content-img" name="src" accept=".png, .jpeg, .jpg">
-                        </label>                    
-                      </div>
-                      <div class="field">
-                        <label class="label" for="content-name">
-                          <p>제목</p>
-                            <input type="text" id="content-name" name="name">
-                        </label>
-                      </div>
-                      <div class="field">
-                        <label class="label" for="content-tag">
-                          <p>태그 </p>
-                            <input type="text" id="content-tag" name="tag">
-                        </label>
-                      </div>
-                    <button class="button is-success">업로드</button>
-                  </form>
-              </div>
-            </section>
-            <footer class="modal-card-foot">
-              
-              <button class="button">취소</button>
-            </footer>
-        </div>
-      </div>
-    </div>
 
     <script>
         $('#nav-placeholder').load('/nav/nav.html');
         $('#footer-placeholder').load('/footer/footer.html');
     </script>
-    <script src="/content-modal/content-modal.js" type="module"></script>
     <link rel="stylesheet" href="/search/search.css">
-    <script src="/nav/nav.js" type="module"></script>
-    <link rel="stylesheet" href="/nav/nav.css">
+    
 </body>
 </html>

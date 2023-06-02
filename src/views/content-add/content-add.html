@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>밈장고</title>
+    <script src="/content-add/content-add.js" type="module"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <link rel="stylesheet" href="/footer/footer.css">
+    <link rel="stylesheet" href="/content-add/content-add.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="/nav/nav.js" type="module"></script>
+    <link rel="stylesheet" href="/nav/nav.css">
+</head>
+<body>
+    <!-- navigation bar -->
+    <div id="nav-placeholder"></div>
+    
+
+    <!-- Content ... -->
+    <div class="content-upload-container">
+        <form class="box" id="content-upload-form" enctype="multipart/form-data">
+            <div class="field">
+                <label class="label" for="content-img">
+                    <p>사진업로드</p>
+                    <input type="file" id="content-img" name="src" accept=".png, .jpeg, .jpg">
+                </label>                    
+                </div>
+                <div class="field">
+                <label class="label" for="content-name">
+                    <p>제목</p>
+                    <input type="text" id="content-name" name="name">
+                </label>
+                </div>
+                <div class="field">
+                <label class="label" for="content-tag">
+                    <p>태그 </p>
+                    <input type="text" id="content-tag" name="tag">
+                </label>
+            </div>
+            <button class="button is-success">업로드</button>
+        </form>
+    </div>
+
+    <!-- footer -->
+    <div id="footer-placeholder"></div>
+    
+    <script>
+        $('#footer-placeholder').load('/footer/footer.html');
+    </script>
+</body>
+</html>

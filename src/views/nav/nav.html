@@ -9,13 +9,17 @@
 
       <form id="search-container">
         <input class="input is-primary is-focused" id="search-input" type="text" placeholder="검색">
-        <button class="button is-secondary" id ="search-submit-button" type="submit">검색</button>
+        <button class="button is-secondary" id ="search-submit-button" type="submit">
+          <span class="icon">
+            <i class="fas fa-search"></i>
+          </span>
+        </button>
       </form>
 
       <div class="navbar-end">
         <div class="navbar-item">
           <p class="control">
-            <button class="button is-white" id='content-upload-modal-button' data-target="content-upload-modal">
+            <button class="button is-white" id='content-upload-button' onclick="location.href='/content-add/content-add.html'">
               <span class="icon">
                 <i class="fas fa-plus"></i>
               </span>

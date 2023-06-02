@@ -2,7 +2,6 @@ import * as Api from '../api.js';
 
 
 async function navbarEndUserInfo(){
-    console.log('내비게이션 바')
     const result = await Api.get('/users','auth')
     const userNav = document.getElementById("navbar-auth")
     
@@ -61,10 +60,9 @@ async function searchExecute(e){
 }
 
 window.onload = function(){
-  const search = document.getElementById('search-container')
-  if(search){
+  $('#nav-placeholder').load('/nav/nav.html', ()=>{
+    const search = document.getElementById('search-container')
     search.addEventListener('submit',searchExecute)
-  }
-  navbarEndUserInfo();
+    navbarEndUserInfo();
+  });
 }
-

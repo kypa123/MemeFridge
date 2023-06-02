@@ -17,7 +17,7 @@ viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/sign-up', serveStatic('sign-up'));
 viewsRouter.use('/login',serveStatic('login'));
 viewsRouter.use('/search/tags/:tags',serveStatic('search'));
-
+viewsRouter.use('/content-add',serveStatic('content-add'));
 
 
 viewsRouter.use('/',serveStatic(''));
