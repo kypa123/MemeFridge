@@ -26,7 +26,7 @@ class UserModel{
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
-            const result = await connection.query(`insert into users (name, password,email) values ('${userInfo.name}','${userInfo.hashedPassword}','${userInfo.email}');`);
+            const result = await connection.query(`insert into users (name, password,email) values ('${userInfo.name}','${userInfo.hashedPassword}','${userInfo.email}') returning id;`);
             await connection.end()
             return result;
         }
@@ -60,7 +60,6 @@ class UserModel{
             console.log(err)
         }
     }
-
 }
 
 const userModel = new UserModel(connectionInfo);
