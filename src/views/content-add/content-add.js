@@ -32,6 +32,7 @@ async function checkLogin(){
         const uploaderPassword = document.getElementById('uploader-password');
         uploaderName.placeholder = userInfo.name;
         uploaderName.readOnly = true;
+        uploaderName.value = userInfo.name;
         uploaderPassword.placeholder = "********";
         uploaderPassword.readOnly = true;
     }
