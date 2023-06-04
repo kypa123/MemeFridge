@@ -8,11 +8,9 @@ class ContentService{
     }
 
     async addContent(contentInfo){
-        // const {name, desc, url} = contentInfo
         // 중복제거를 위한 로직 필요, 이미 존재하는 컨텐츠명 등
         const result = await this.contentModel.addContent(contentInfo);
         return result
-
     }
 
     async findByOffset(offset){
@@ -69,8 +67,6 @@ class ContentService{
             console.log(err)
         }
     }
-    
-    
 }
 
 
