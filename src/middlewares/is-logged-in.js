@@ -19,10 +19,11 @@ async function isLoggedIn(req, res, next) {
             next();
         }
         catch(err){
-                req.tokenInfo = err.message
-                console.log('토큰이 만료됐거나 문제가있습니다.')
-                console.log(err.message)
-                next();
+                res.json({
+                    status: 'error',
+                    statusCode:401,
+                    message: err.message
+                })
             }
     }
 }

@@ -4,8 +4,8 @@ import * as Api from '../api.js';
 async function navbarEndUserInfo(){
     const result = await Api.get('/users','auth')
     const userNav = document.getElementById("navbar-auth")
-    
-    if(result.statusCode == 403){
+    if(result.status == 'error'){
+        await Api.post('/users/logout');
         const signUpTag = document.createElement('a');
         const loginTag = document.createElement('a');
         signUpTag.className = loginTag.className= "navbar-item";
