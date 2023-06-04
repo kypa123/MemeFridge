@@ -76,10 +76,10 @@ export class ContentModel{
 
     async addContent(contentInfo){
         try{
-            const {name, tag, url} = contentInfo;
+            const {name, tag, uploaderId, url, login } = contentInfo;
             const connection = new pg.Client(this.conenctionInfo)
             await connection.connect();
-            const result = await connection.query(`insert into contents (title, creator, url, tag) values ('${name}', 2, '${url}', '${tag}')`)
+            const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}')`)
             await connection.end();
             return result;
         }
