@@ -6,7 +6,8 @@ const userRouter = Router();
 
 userRouter.get('/', async function(req, res, next){
     try{
-        const userInfo = await userService.findUser('superuser');
+        const name = req.query.name;
+        const userInfo = await userService.findUser({name});
         res.json(userInfo)
     }
     catch(err){
