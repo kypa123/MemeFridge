@@ -24,3 +24,11 @@ export const utf8Decode = (utf8String) =>{
     );
     return unicodeString;
 }
+
+export const checkInput = (inputString)=>{
+    const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gim;
+    if(reg.test(inputString)){
+        return false;
+    }
+    return true;
+}

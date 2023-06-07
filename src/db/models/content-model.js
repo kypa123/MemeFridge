@@ -79,7 +79,7 @@ export class ContentModel{
             const {name, tag, uploaderId, url, login } = contentInfo;
             const connection = new pg.Client(this.conenctionInfo)
             await connection.connect();
-            const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}')`)
+            const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`);
             await connection.end();
             return result;
         }
