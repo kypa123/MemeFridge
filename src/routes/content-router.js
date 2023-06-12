@@ -38,6 +38,18 @@ contentRouter.get('/id', async function(req, res, next){
     }
 });
 
+contentRouter.get('/user', async function(req, res, next){
+    try{
+        const userName = req.query.user;
+        const userId = await userService.findUser({name: userName});
+        const result = await contentService.findByUserId(userId.res[0].id);
+        res.json(result);
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 contentRouter.get('/tags', async function(req, res, next){
     try{
         const tags = req.query.tags.split("-");

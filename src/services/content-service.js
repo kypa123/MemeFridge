@@ -28,6 +28,10 @@ class ContentService{
         return result;
     }
 
+    async findByUserId(userId){
+        const result = await this.contentModel.findByUserId(userId);
+        return result
+    }
     async updateContent(contentInfo){
         const result = await this.contentModel.updateContent(contentInfo);
         return result;
