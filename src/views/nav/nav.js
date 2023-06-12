@@ -20,7 +20,7 @@ async function navbarEndUserInfo(){
         const userPageTag = document.createElement('a');
         const logoutTag = document.createElement('a');
         userPageTag.className = logoutTag.className = "navbar-item";
-        userPageTag.href = "/userPage"
+        userPageTag.href = "/my-page"
         userPageTag.innerHTML = `<span class="icon">
         <i class="fas fa-user-o"></i>
       </span>
