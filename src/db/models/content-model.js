@@ -95,6 +95,14 @@ export class ContentModel{
         await connection.end();
         return result.rows;
     }
+
+    async deleteContent(contentId){
+        const connection = new pg.Client(this.conenctionInfo)
+        await connection.connect();
+        const result = await connection.query(`delete from contents where id=${contentId}`);
+        await connection.end();
+        return result.rows;
+    }
 }
 
 const contentModel = new ContentModel(connectionInfo);

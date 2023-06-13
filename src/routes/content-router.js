@@ -86,5 +86,17 @@ contentRouter.post('/', upload, async function(req, res, next){
     }
 });
 
+contentRouter.delete('/', async function(req, res, next){
+    try{
+        const id = req.body.id
+        const result = await contentService.deleteContent(id);
+        res.json(result);
+    }
+    catch(err){
+        next(err)
+    }
+})
+
+
 
 export default contentRouter;
