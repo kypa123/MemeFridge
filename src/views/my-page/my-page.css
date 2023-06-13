@@ -1,48 +1,37 @@
+#my-page-content-container{
+    margin-top: 12vh;
+    width: 80%;
+    text-align: center;
+}
+
+#user-name{
+    font-weight:bold;
+    font-size: 32px;
+}
+
+#my-page-content{
+    margin-top: 10vh;
+    text-align: center;
+    background-color: ;
+}
+
+#my-page-content-count{
+    margin: 2vh;
+}
+
 .row{
     display: flex;
-}
-
-.container{
-    margin-top: 100px;
-}
-
-.search-page-container{
-    width: 100vw;
-    height: 80vh;
-    
-}
-
-#content-container{
-    height: 50%;
-    width: 80%;
-}
-
-
-#all-content-container{
-    margin: auto;
-    max-width: 80%;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    display: flex;
 }
-
 .content{
-    text-align: center;
     padding: 10px;
     margin-bottom: 1.5rem;
 }
 
-
-#all-content-title-box{
-    margin: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    width: 80%;
-}
-
 .content-img{
-    width: 230px;
-    height: 230px;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
     border: 1px solid #eeeeee;
     border-radius: 7px;
@@ -51,6 +40,7 @@
 img{
     vertical-align: middle;
 }
+
 a{
     color: inherit;
 }

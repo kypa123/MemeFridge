@@ -28,13 +28,17 @@ class ContentService{
         return result;
     }
 
+    async findByUserId(userId){
+        const result = await this.contentModel.findByUserId(userId);
+        return result
+    }
     async updateContent(contentInfo){
         const result = await this.contentModel.updateContent(contentInfo);
         return result;
     }
 
-    async deleteContent(contentInfo){
-        const result = await this.contentModel.deleteContent(contentInfo);
+    async deleteContent(contentId){
+        const result = await this.contentModel.deleteContent(contentId);
         return result;
     }
     async updateCacheRankData(){
@@ -67,6 +71,7 @@ class ContentService{
             console.log(err)
         }
     }
+
 }
 
 

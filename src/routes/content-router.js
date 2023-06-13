@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { userService, contentService, nonMemberService } from '../services/index.js'
+import { userService, contentService, nonMemberContentService } from '../services/index.js'
 import { upload } from '../middlewares/index.js';
 const contentRouter = Router();
 
@@ -38,6 +38,18 @@ contentRouter.get('/id', async function(req, res, next){
     }
 });
 
+contentRouter.get('/user', async function(req, res, next){
+    try{
+        const userName = req.query.user;
+        const userId = await userService.findUser({name: userName});
+        const result = await contentService.findByUserId(userId.res[0].id);
+        res.json(result);
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 contentRouter.get('/tags', async function(req, res, next){
     try{
         const tags = req.query.tags.split("-");
@@ -62,22 +74,10 @@ contentRouter.post('/', upload, async function(req, res, next){
         }
         //비회원일때
         else{
-            const nonMemberName = "NM_" + uploaderName
-            const check = await userService.findUser({name:nonMemberName});
-            let id;
-            let resu;
-            //비회원 로그인이면서 같은아이디가 없을때
-            if(check.statusCode == 404){
-                const nonMember = await userService.addUser({name:nonMemberName, password: uploaderPassword, email: ''});
-                id = nonMember.rows[0].id;
-                resu = await nonMemberService.addNonMemberInfo(id);
-            }
-            //비회원 로그인이지만 이미 똑같은 아이디를 만들었을 때
-            else{
-                id = check.res[0].id;
-                resu = await nonMemberService.increaseContentCount(id);
-            }
-            const result = await contentService.addContent({name,tag,url:imageURL, uploaderId:id, login: false})
+            const result = await contentService.addContent({name,tag,url:imageURL, uploaderId:0, login: false});
+            console.log(result.rows[0])
+            const nonMemberResult = await nonMemberContentService.addNonMemberContentInfo({uploaderName, uploaderPassword, contentId: result.rows[0].id})
+            console.log(nonMemberResult);
             res.json(result);
         }
     }
@@ -85,6 +85,18 @@ contentRouter.post('/', upload, async function(req, res, next){
         next(err)
     }
 });
+
+contentRouter.delete('/', async function(req, res, next){
+    try{
+        const id = req.body.id
+        const result = await contentService.deleteContent(id);
+        res.json(result);
+    }
+    catch(err){
+        next(err)
+    }
+})
+
 
 
 export default contentRouter;

@@ -3,9 +3,10 @@ import * as Api from '../api.js';
 
 async function navbarEndUserInfo(){
     const result = await Api.get('/users','auth')
-    const userNav = document.getElementById("navbar-auth")
+    const userNavDropdown = document.getElementById("navbar-auth-dropdown")
     
-    if(result.statusCode == 403){
+    if(result.status == 'error'){
+        await Api.post('/users/logout');
         const signUpTag = document.createElement('a');
         const loginTag = document.createElement('a');
         signUpTag.className = loginTag.className= "navbar-item";
@@ -13,14 +14,16 @@ async function navbarEndUserInfo(){
         loginTag.href = "/login";
         signUpTag.innerText = "회원가입";
         loginTag.innerText = "로그인";
-        userNav.appendChild(signUpTag);
-        userNav.appendChild(loginTag);
+        userNavDropdown.appendChild(signUpTag);
+        userNavDropdown.appendChild(loginTag);
     }
     else{
+        const navbarAuth = document.getElementById('navbar-user');
         const userPageTag = document.createElement('a');
         const logoutTag = document.createElement('a');
+        navbarAuth.innerText = "회원";
         userPageTag.className = logoutTag.className = "navbar-item";
-        userPageTag.href = "/userPage"
+        userPageTag.href = "/my-page"
         userPageTag.innerHTML = `<span class="icon">
         <i class="fas fa-user-o"></i>
       </span>
@@ -35,8 +38,8 @@ async function navbarEndUserInfo(){
         로그아웃
       </span>`
         
-        userNav.appendChild(userPageTag);
-        userNav.appendChild(logoutTag);
+        userNavDropdown.appendChild(userPageTag);
+        userNavDropdown.appendChild(logoutTag);
         logoutTag.addEventListener('click',async function(){
           const result = await Api.post('/users/logout');
           if(result.message == "ok"){

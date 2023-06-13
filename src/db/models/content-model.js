@@ -48,7 +48,7 @@ export class ContentModel{
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(`select * from contents inner join users on contents.creator = users.id where creator=${userId}`)
+            const result = await connection.query(`select * from contents where creator=${userId}`)
             await connection.end();
             return result;
         }
@@ -79,7 +79,7 @@ export class ContentModel{
             const {name, tag, uploaderId, url, login } = contentInfo;
             const connection = new pg.Client(this.conenctionInfo)
             await connection.connect();
-            const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}')`)
+            const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`);
             await connection.end();
             return result;
         }
@@ -92,6 +92,14 @@ export class ContentModel{
         const connection = new pg.Client(this.conenctionInfo)
         await connection.connect();
         const result = await connection.query(`select * from contents order by count desc limit 4;`);
+        await connection.end();
+        return result.rows;
+    }
+
+    async deleteContent(contentId){
+        const connection = new pg.Client(this.conenctionInfo)
+        await connection.connect();
+        const result = await connection.query(`delete from contents where id=${contentId}`);
         await connection.end();
         return result.rows;
     }

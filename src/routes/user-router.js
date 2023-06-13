@@ -27,10 +27,10 @@ userRouter.post('/', async function(req, res, next){
 
 userRouter.get('/auth', isLoggedIn, async function(req,res,next){
     try{
-        const userInfo = req.tokenInfo
+        const userInfo = await userService.findUser({name:req.tokenInfo.name, email: req.tokenInfo.email});
         res
         .status(200)
-        .json(userInfo)
+        .json(userInfo.res[0])
     }
     catch(err){
         next(err)

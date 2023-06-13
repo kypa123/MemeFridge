@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>밈장고</title>
-    <script src="/search/search.js" type="module"></script>
+    <title>마이페이지</title>
+    <script src="/my-page/my-page.js" type="module"></script>
+    <link rel="stylesheet" href="/my-page/my-page.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
     <link rel="stylesheet" href="/footer/footer.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="/nav/nav.js" type="module"></script>
     <link rel="stylesheet" href="/nav/nav.css">
+    <script src="/nav/nav.js" type="module" defer></script>
 </head>
 <body>
     <!-- navigation bar -->
     <div id="nav-placeholder"></div>
 
-    <!-- search contents -->
-    <div class="search-page-container" class="container is-widescreen">
-        <div id="all-content-title-box" class="box">전체 컨텐츠</div>
-        <div id="all-content-container">
-            <div id="all-contents"></div>
+    <div id="my-page-content-container" class="container is-widescreen">
+        <div class="my-page-info">
+            <h1 id="user-name"></h1>
+            <p id="user-email"></p>
+        </div>
+
+        <div id="my-page-content">
+            <h1 id="my-page-content-count"></h1>
         </div>
     </div>
+
     <!-- footer -->
     <div id="footer-placeholder"></div>
-
     <script>
-        $('#nav-placeholder').load('/nav/nav.html');
-        $('#footer-placeholder').load('/footer/footer.html');
+    $('#footer-placeholder').load('/footer/footer.html');
     </script>
-    <link rel="stylesheet" href="/search/search.css">
-    
 </body>
 </html>
