@@ -19,6 +19,7 @@ async function loadMyPageContent(){
     const resultContent = result.rows
     const row = document.createElement('div');
         row.className = "row"
+        console.log(resultContent);
         resultContent.forEach(el=>{
             let tag = ''
             el.tag.split(" ").slice(0,3).forEach(t=>{

@@ -48,7 +48,7 @@ export class ContentModel{
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(`select * from contents inner join users on contents.creator = users.id where creator=${userId}`)
+            const result = await connection.query(`select * from contents where creator=${userId}`)
             await connection.end();
             return result;
         }
