@@ -11,8 +11,21 @@ async function searchDataInsert(){
     const container = document.getElementById('all-contents');
     const tags = location.pathname.split('/')[3]
     const result = await Api.get('/contents/tags',`?tags=${tags}`)
-    let rowCount = 0 
+    if(result.rowCount == 0){
+        const div = document.createElement('div');
+        const noResult = document.createElement('h1');
+        const pepeImage = document.createElement('img')
+        pepeImage.src = '/pepe.jpg';
+        pepeImage.style="width: 230px; height: 230px;"
+        noResult.innerText = '검색 결과가 없습니다';
+        div.style= "text-align: center;";
+        div.appendChild(noResult);
+        div.appendChild(pepeImage);
+        container.appendChild(div);
+        return
+    }
 
+    let rowCount = 0 
     while(rowCount <= result.rowCount){
         const row = document.createElement('div')
         row.className = "row"
