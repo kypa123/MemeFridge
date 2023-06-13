@@ -6,20 +6,38 @@
     margin-top: 100px;
 }
 
-.main-page-container{
-    align-items: center;
-    align-content: center;
+.search-page-container{
+    width: 100vw;
+    height: 80vh;
+    
 }
+
+#content-container{
+    height: 50%;
+    width: 80%;
+}
+
 
 #all-content-container{
     margin: auto;
-    max-width: 980px;
+    max-width: 80%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .content{
     text-align: center;
     padding: 10px;
     margin-bottom: 1.5rem;
+}
+
+
+#all-content-title-box{
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
 }
 
 .content-img{
@@ -43,4 +61,13 @@ a{
     left: 50%; 
     transform: translate( -50%, -50% ); 
     display: flex;
+}
+
+.content .content-tags .tag{
+    color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 3px;
+    background-color: #2e6b6a;
 }
