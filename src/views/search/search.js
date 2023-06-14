@@ -15,7 +15,7 @@ async function searchDataInsert(){
         const div = document.createElement('div');
         const noResult = document.createElement('h1');
         const pepeImage = document.createElement('img')
-        pepeImage.src = '/pepe.jpg';
+        pepeImage.src = '/images/pepe.jpg';
         pepeImage.style="width: 230px; height: 230px;"
         noResult.innerText = '검색 결과가 없습니다';
         div.style= "text-align: center;";

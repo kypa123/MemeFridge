@@ -6,7 +6,7 @@ import * as url from 'url';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const viewsRouter = express.Router();
 
-viewsRouter.use('/', serveStatic('home'));
+viewsRouter.use('/', serveStatic('main'));
 viewsRouter.use('/nav',serveStatic('nav'));
 viewsRouter.use('/footer',serveStatic('footer'));
 viewsRouter.use('/content-modal',serveStatic('content-modal'));

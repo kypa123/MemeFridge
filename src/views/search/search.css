@@ -7,14 +7,8 @@
 }
 
 .search-page-container{
-    width: 100vw;
-    height: 80vh;
-    
-}
-
-#content-container{
-    height: 50%;
-    width: 80%;
+    height: 100%;
+    margin: auto;
 }
 
 
@@ -34,10 +28,11 @@
 
 
 #all-content-title-box{
+    width: 50vw;
     margin: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-    width: 80%;
+    font-weight: bold;
 }
 
 .content-img{

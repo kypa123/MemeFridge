@@ -12,9 +12,8 @@
 }
 
 #rank-content-container{
-    width: 80%;
     margin: auto;
-    margin-bottom : 6%;
+    max-width: 980px;
 }
 
 #rank-content-title-box{
@@ -64,4 +63,9 @@ a{
     font-weight: bold;
     padding: 3px;
     background-color: #2e6b6a;
+}
+
+#offset-button{
+    width: 20%;
+    margin: auto;
 }

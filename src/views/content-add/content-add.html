@@ -22,7 +22,7 @@
             <div class="field">
                 <label class="label" for="content-img">
                     <p>사진업로드</p>
-                    <input type="file" id="content-img" name="src" accept=".png, .jpeg, .jpg">
+                    <input class="input" type="file" id="content-img" name="src" accept=".png, .jpeg, .jpg">
                 </label>                    
                 <img src="" id="image-preview">
             </div>
@@ -30,23 +30,23 @@
             <div class="field">
                 <label class="label" for="content-name">
                     <p>제목</p>
-                    <input type="text" id="content-name" name="name">
+                    <input class="input" type="text" id="content-name" name="name" placeholder="제목을 입력해주세요">
                 </label>
             </div>
             <div class="field">
                 <label class="label" for="content-tag">
                     <p>태그</p>
-                    <input type="text" id="content-tag" name="tag">
+                    <input class="input" type="text" id="content-tag" name="tag" placeholder="공백을 기준으로 여러개 입력">
                 </label>
                 <hr>
                 <h3 id="login-check"></h3>
                 <label class="label" for="content-uploader-name">
                     <p>아이디</p>
-                    <input type="text" id="uploader-name" name="uploaderName">
+                    <input class="input" type="text" id="uploader-name" name="uploaderName" placeholder="4~10자리, 특수문자 및 공백 금지">
                 </label>
                 <label class="label" for="content-uploader-password">
                     <p>비밀번호</p>
-                    <input type="password" id="uploader-password" name="uploaderPassword">
+                    <input class="input" type="password" id="uploader-password" name="uploaderPassword" placeholder="4~10자리, 특수문자 및 공백 금지">
                 </label>
             </div>
             <button class="button is-success">업로드</button>
