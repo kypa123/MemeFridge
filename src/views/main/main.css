@@ -65,3 +65,8 @@ a{
     padding: 3px;
     background-color: #2e6b6a;
 }
+
+#offset-button{
+    width: 20%;
+    margin: auto;
+}
