@@ -34,7 +34,7 @@ async function handleSubmit(e){
         }
         else{
             alert('회원가입 완료!')
-            window.location.href='http://localhost:3000/main';
+            window.location.href='/main';
         }
     }
     catch(err){

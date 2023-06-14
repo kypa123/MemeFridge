@@ -9,7 +9,7 @@ async function loadMyPageContent(){
     const userInfo = await Api.get('/users','auth');
     if(userInfo.statusCode == 403){
         alert('로그인되어 있지 않습니다!');
-        window.location.href="/main"
+        window.location.href='/main'
     }
     userName.innerText = userInfo.name + " 님";
     userEmail.innerText = userInfo.email;
