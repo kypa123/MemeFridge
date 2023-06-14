@@ -12,9 +12,8 @@
 }
 
 #rank-content-container{
-    width: 80%;
     margin: auto;
-    margin-bottom : 6%;
+    max-width: 980px;
 }
 
 #rank-content-title-box{
