@@ -29,7 +29,7 @@ async function handleSubmit(e){
         console.log(result);
         if (result.status == 'success'){
             alert('로그인 ok')
-            window.location.href='http://localhost:3000/main';
+            window.location.href='/main';
         }
         else{
             alert(result.message)
