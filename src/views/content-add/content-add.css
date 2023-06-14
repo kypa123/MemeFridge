@@ -1,9 +1,28 @@
 .content-upload-container{
     text-align: center;
-    margin-top: 8%;
+    margin: 8% 0;
 }
+
+.content-upload-container #content-upload-form{
+    width: 25vw;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.content-upload-container .box .field .input{
+    margin-top: 3%;
+    margin-bottom : 3%;
+    width: 80%;
+    text-align: center;
+}
+
 
 .content-upload-container #content-upload-form #image-preview{
     margin-top: 50px;
     width: 450px;
+}
+
+#login-check{
+    margin: 5% 0;
+    font-weight: bold;
 }
