@@ -1,0 +1,35 @@
+version: "1"
+services:
+
+  postgres:
+    image: postgres:13-alpine3.17
+    environment:
+      POSTGRES_USER: wallcraft
+      POSTGRES_PASSWORD: 1111
+      POSTGRES_DB: wallcraft
+    ports:
+      - 5432:5432
+    volumes:
+      - /Users/wallcraft/Library/Application Support/Postgres/var-13
+
+  redis:
+    image: redis:7
+    ports:
+      - 6379:6379
+
+  app:
+    build:
+      context: .
+      dockerfile:
+        ./DockerFile
+    env_file:
+      - ./.env
+    environment:
+      DB_HOST: postgres
+      DB_ID: wallcraft
+      DB_PASSWORD: 1111
+      DB_NAME: wallcraft
+      DB_PORT: 5432
+
+    ports:
+      - 80:3000

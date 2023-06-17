@@ -44,14 +44,18 @@ class ContentService{
     async updateCacheRankData(){
         try{
             const rankData = await this.contentModel.getRankContents();
-            const client = this.createClient();
+            const client = createClient({
+                url: 'redis://redis'
+              });
             await client.connect();
-            let rank = 1;
-            rankData.forEach(data=>{
-                client.set(`rank${rank}`,JSON.stringify(data))
-                rank++;
-            })
-            return;
+            if(client.isOpen){
+                let rank = 1;
+                rankData.forEach(data=>{
+                    client.set(`rank${rank}`,JSON.stringify(data))
+                    rank++;
+                })
+                return;
+            }
         }
         catch(err){
             console.log(err)
@@ -60,13 +64,17 @@ class ContentService{
 
     async getCacheRankData(){
         try{
-            const client = this.createClient();
+            const client = createClient({
+                url: 'redis://redis'
+              });
             await client.connect();
-            let result = []
-            for(let i = 1; i<5; i++){;
-                result.push({rank: i, ...JSON.parse(await client.get(`rank${i}`))})
+            if(client.isOpen){
+                let result = []
+                for(let i = 1; i<5; i++){;
+                    result.push({rank: i, ...JSON.parse(await client.get(`rank${i}`))})
+                }
+                return result;
             }
-            return result;
         }catch(err){
             console.log(err)
         }

@@ -3,7 +3,8 @@ import connectionInfo from '../connectionInfo.js';
 
 export class ContentModel{
     constructor(connectionInfo){
-        this.connectioninfo = connectionInfo;
+        this.connectionInfo = connectionInfo;
+        console.log('컨텐츠 연결정보는:', connectionInfo, this.connectionInfo)
     }
 
     async findAll(){
@@ -21,7 +22,7 @@ export class ContentModel{
 
     async findByOffset(offset){
         try{
-            const connection = new pg.Client(this.connectioninfo);
+            const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(`select * from contents order by id limit 4 offset ${offset};`);
             await connection.end()
@@ -77,19 +78,22 @@ export class ContentModel{
     async addContent(contentInfo){
         try{
             const {name, tag, uploaderId, url, login } = contentInfo;
-            const connection = new pg.Client(this.conenctionInfo)
+            console.log('모델까지 도착')
+            const connection = new pg.Client(this.connectionInfo)
             await connection.connect();
             const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`);
+            console.log(result)
             await connection.end();
             return result;
         }
         catch(err){
+            console.log(err);
             return err;
         }
     }
 
     async getRankContents(){
-        const connection = new pg.Client(this.conenctionInfo)
+        const connection = new pg.Client(this.connectionInfo)
         await connection.connect();
         const result = await connection.query(`select * from contents order by count desc limit 4;`);
         await connection.end();
@@ -97,7 +101,7 @@ export class ContentModel{
     }
 
     async deleteContent(contentId){
-        const connection = new pg.Client(this.conenctionInfo)
+        const connection = new pg.Client(this.connectionInfo)
         await connection.connect();
         const result = await connection.query(`delete from contents where id=${contentId}`);
         await connection.end();
