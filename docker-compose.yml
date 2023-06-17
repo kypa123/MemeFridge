@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: wallcraft
     ports:
       - 5432:5432
+    volumes:
+      - /Users/wallcraft/Library/Application Support/Postgres/var-13
 
   redis:
     image: redis:7
@@ -28,5 +30,6 @@ services:
       DB_PASSWORD: 1111
       DB_NAME: wallcraft
       DB_PORT: 5432
+
     ports:
       - 80:3000

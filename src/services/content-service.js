@@ -44,7 +44,9 @@ class ContentService{
     async updateCacheRankData(){
         try{
             const rankData = await this.contentModel.getRankContents();
-            const client = this.createClient();
+            const client = createClient({
+                url: 'redis://redis'
+              });
             await client.connect();
             let rank = 1;
             rankData.forEach(data=>{
@@ -60,7 +62,9 @@ class ContentService{
 
     async getCacheRankData(){
         try{
-            const client = this.createClient();
+            const client = createClient({
+                url: 'redis://redis'
+              });
             await client.connect();
             let result = []
             for(let i = 1; i<5; i++){;
