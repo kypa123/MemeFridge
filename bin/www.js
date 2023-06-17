@@ -2,6 +2,27 @@
 import app from '../src/app.js';
 import http from 'http';
 import debug from 'debug'
+import pg from 'pg'
+import { createClient } from 'redis'
+
+const conn = new pg.Client('postgres://wallcraft:1111@postgres:5432/wallcraft')
+
+await conn.connect();
+const res = await conn.query('LISTEN foo');
+console.log(res)
+await conn.end();
+
+
+
+const client = createClient({
+  url: 'redis://redis'
+});
+// Check if redis is running
+await client.connect();
+if(client.isOpen){
+  console.log("redis ok")
+  client.set('isOK',1)
+}
 
 
 
