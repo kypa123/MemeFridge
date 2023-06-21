@@ -1,4 +1,4 @@
-version: "1"
+version: "2"
 services:
 
   postgres:
@@ -24,12 +24,6 @@ services:
         ./DockerFile
     env_file:
       - ./.env
-    environment:
-      DB_HOST: postgres
-      DB_ID: wallcraft
-      DB_PASSWORD: 1111
-      DB_NAME: wallcraft
-      DB_PORT: 5432
 
     ports:
       - 80:3000
