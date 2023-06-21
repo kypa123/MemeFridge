@@ -45,7 +45,7 @@ class ContentService{
         try{
             const rankData = await this.contentModel.getRankContents();
             const client = createClient({
-                url: 'redis://redis'
+                url: process.env.REDIS_CONNECTION
               });
             await client.connect();
             if(client.isOpen){
@@ -65,7 +65,7 @@ class ContentService{
     async getCacheRankData(){
         try{
             const client = createClient({
-                url: 'redis://redis'
+                url: process.env.REDIS_CONNECTION
               });
             await client.connect();
             if(client.isOpen){
