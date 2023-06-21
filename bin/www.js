@@ -5,17 +5,17 @@ import debug from 'debug'
 import pg from 'pg'
 import { createClient } from 'redis'
 
-const conn = new pg.Client('postgres://wallcraft:1111@postgres:5432/wallcraft')
+const conn = new pg.Client(process.env.POSTGRES_CONNECTION)
 
 await conn.connect();
 const res = await conn.query('LISTEN foo');
-console.log(res)
+if(res){
+  console.log('pg ok')
+}
 await conn.end();
 
-
-
 const client = createClient({
-  url: 'redis://redis'
+  url: process.env.REDIS_CONNECTION
 });
 // Check if redis is running
 await client.connect();
