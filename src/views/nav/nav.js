@@ -53,8 +53,9 @@ async function searchExecute(e){
   e.preventDefault();
   try{
     const keywords = document.getElementById('search-input').value;
-    const query = keywords.replaceAll(' ','-');
-    console.log(query)
+    let query;
+    if(!!keywords) query = keywords.replaceAll(' ','-');
+    else query = "''";
     window.location.href=`/search/tags/${query}`
   }
   catch(err){
