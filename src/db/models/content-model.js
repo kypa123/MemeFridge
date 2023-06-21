@@ -4,7 +4,6 @@ import connectionInfo from '../connectionInfo.js';
 export class ContentModel{
     constructor(connectionInfo){
         this.connectionInfo = connectionInfo;
-        console.log('컨텐츠 연결정보는:', connectionInfo, this.connectionInfo)
     }
 
     async findAll(){
