@@ -76,7 +76,7 @@ contentRouter.post('/', upload, async function(req, res, next){
         else{
             const result = await contentService.addContent({name,tag,url:imageURL, uploaderId:0, login: false});
             console.log(result.rows[0])
-            const nonMemberResult = await nonMemberContentService.addNonMemberContentInfo({uploaderName, uploaderPassword, contentId: result.rows[0].id})
+            const nonMemberResult = await nonMemberContentService.addNonMemberContent({uploaderName, uploaderPassword, contentId: result.rows[0].id})
             console.log(nonMemberResult);
             res.json(result);
         }

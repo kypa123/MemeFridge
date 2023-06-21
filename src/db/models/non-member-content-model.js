@@ -7,7 +7,7 @@ class NonMemberContentModel{
         this.connectionInfo = connectionInfo
     }
     
-    async addNonMemberContentAuth(nonMemberContentInfo){
+    async addNonMemberContent(nonMemberContentInfo){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
@@ -20,11 +20,11 @@ class NonMemberContentModel{
         }
     }
 
-    async deleteNonMemberContentAuth(contentId){
+    async deleteNonMemberContent(contentId){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
-            const result = await connection.query(`delete from non_member_contents where content_id = ${nonMemberContentId};`);
+            const result = await connection.query(`delete from non_member_contents where content_id = ${contentId};`);
             await connection.end()
             return result
         }
