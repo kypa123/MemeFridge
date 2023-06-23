@@ -22,6 +22,7 @@ async function uploadContent(e){
     const form = new FormData(myForm);
     if(!check){
       for(const pair of form.entries()){
+        console.log(pair)
         if(pair[0] == 'src'){
           if(pair[1].size == 0){
             return alert('파일을 올려주세요!');
@@ -36,12 +37,14 @@ async function uploadContent(e){
             return alert('특수문자, 공백을 제거해서 다시 입력해주세요!');
           }
         }
+
         else if(!pair[1]){
           return alert(`${pair[0]}을(를) 다시한번 확인해주세요!`);
         }
       }
     }
     try{
+        form.set('tag',form.get('tag').trim())
         const result = await Api.post('/contents',form, 'meme')
         if(result){
           alert("업로드 완료!")
