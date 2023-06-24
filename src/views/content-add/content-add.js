@@ -22,7 +22,6 @@ async function uploadContent(e){
     const form = new FormData(myForm);
     if(!check){
       for(const pair of form.entries()){
-        console.log(pair)
         if(pair[0] == 'src'){
           if(pair[1].size == 0){
             return alert('파일을 올려주세요!');
