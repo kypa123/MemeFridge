@@ -1,5 +1,5 @@
-import userModel from './models/user-model.js'
-import contentModel from './models/content-model.js'
-import nonMemberContentModel from './models/non-member-content-model.js'
+import userModel from './models/user-model.ts'
+import contentModel from './models/content-model.ts'
+import nonMemberContentModel from './models/non-member-content-model.ts'
 
 export {userModel, contentModel,nonMemberContentModel};

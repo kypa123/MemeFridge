@@ -3,11 +3,12 @@ import connectionInfo from '../connectionInfo.js';
 
 
 class NonMemberContentModel{
-    constructor(connectionInfo){
-        this.connectionInfo = connectionInfo
+    private connectionInfo: string
+    constructor(connectionInfo:string){
+        this.connectionInfo = connectionInfo;
     }
     
-    async addNonMemberContent(nonMemberContentInfo){
+    async addNonMemberContent(nonMemberContentInfo:{contentId:number, auth: string}){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
@@ -20,7 +21,7 @@ class NonMemberContentModel{
         }
     }
 
-    async deleteNonMemberContent(contentId){
+    async deleteNonMemberContent(contentId:number){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()

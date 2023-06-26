@@ -3,11 +3,12 @@ import connectionInfo from '../connectionInfo.js';
 
 
 class UserModel{
-    constructor(connectionInfo){
-        this.connectionInfo = connectionInfo
+    private connectionInfo: string
+    constructor(connectionInfo:string){
+        this.connectionInfo = connectionInfo;
     }
     
-    async findUser(userInfo){
+    async findUser(userInfo:{name:string, email:string}){
         try{
             const name = userInfo.name || 'no name'
             const email = userInfo.email || 'no email'
@@ -23,7 +24,7 @@ class UserModel{
         }
     }
 
-    async addUser(userInfo){
+    async addUser(userInfo:{name:string, hashedPassword:string, email: string}){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
@@ -36,7 +37,7 @@ class UserModel{
         }
     }
 
-    async updateUser(userInfo){
+    async updateUser(userInfo:{password: string, email:string, id:string}){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()
@@ -49,7 +50,7 @@ class UserModel{
         }
     }
 
-    async deleteUser(userName){
+    async deleteUser(userName:string){
         try{
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect()

@@ -2,7 +2,8 @@ import pg from 'pg';
 import connectionInfo from '../connectionInfo.js';
 
 export class ContentModel{
-    constructor(connectionInfo){
+    private connectionInfo: string
+    constructor(connectionInfo:string){
         this.connectionInfo = connectionInfo;
     }
 
@@ -19,7 +20,7 @@ export class ContentModel{
         }
     }
 
-    async findByOffset(offset){
+    async findByOffset(offset:number){
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
@@ -31,7 +32,7 @@ export class ContentModel{
             return err;
         }
     }
-    async findByContentId(contentId){
+    async findByContentId(contentId:number){
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
@@ -44,7 +45,7 @@ export class ContentModel{
         }
     }
     
-    async findByUserId(userId){
+    async findByUserId(userId:number){
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
@@ -57,7 +58,7 @@ export class ContentModel{
         }
     }
 
-    async findByTags(tags){
+    async findByTags(tags:string[]){
         try{
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
@@ -74,14 +75,12 @@ export class ContentModel{
         }
     }
 
-    async addContent(contentInfo){
+    async addContent(contentInfo:{name:string, tag:string, uploaderId:number,url:string, login: boolean}){
         try{
             const {name, tag, uploaderId, url, login } = contentInfo;
-            console.log('모델까지 도착')
             const connection = new pg.Client(this.connectionInfo)
             await connection.connect();
             const result = await connection.query(`insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`);
-            console.log(result)
             await connection.end();
             return result;
         }
@@ -99,7 +98,7 @@ export class ContentModel{
         return result.rows;
     }
 
-    async deleteContent(contentId){
+    async deleteContent(contentId:number){
         const connection = new pg.Client(this.connectionInfo)
         await connection.connect();
         const result = await connection.query(`delete from contents where id=${contentId}`);
