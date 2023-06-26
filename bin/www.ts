@@ -1,29 +1,34 @@
 #!/usr/bin/env node
 import app from '../src/app.js';
-import http from 'http';
+import * as http from 'http';
 import debug from 'debug'
 import pg from 'pg'
 import { createClient } from 'redis'
 
 const conn = new pg.Client(process.env.POSTGRES_CONNECTION)
 
-await conn.connect();
-const res = await conn.query('LISTEN foo');
-if(res){
-  console.log('pg ok')
-}
-await conn.end();
+const dbCheck = async () => {
+  //check if pg is running
+  await conn.connect();
+  const res = await conn.query('LISTEN foo');
+  if(res){
+    console.log('pg ok')
+  }
+  await conn.end();
+  
 
-const client = createClient({
-  url: process.env.REDIS_CONNECTION
-});
-// Check if redis is running
-await client.connect();
-if(client.isOpen){
-  console.log("redis ok")
-  client.set('isOK',1)
+  // Check if redis is running
+  const client = createClient({
+    url: process.env.REDIS_CONNECTION
+  });
+  await client.connect();
+  if(client.isOpen){
+    console.log("redis ok")
+    client.set('isOK',1)
+  }
 }
 
+dbCheck()
 
 
 const port = normalizePort(process.env.PORT || '3000');
