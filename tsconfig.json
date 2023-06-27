@@ -8,7 +8,8 @@
       "lib": ["ES2015", "DOM", "DOM.Iterable"],
       "typeRoots": ["./node_modules/@types", "./@types"],
       "allowSyntheticDefaultImports": true,
-      "allowImportingTsExtensions": true
+      "allowImportingTsExtensions": true,
+      "noEmit" : true
     },
     "include": ["./src/**/*"],
     "exclude": ["node_modules", "dist"]
