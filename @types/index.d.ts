@@ -1,2 +1,2 @@
 declare module 'debug';
-declare module 'express';
+declare module 'pg';
