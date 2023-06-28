@@ -2,8 +2,12 @@
 
 과거, 현재 유행하는 유행어 및 짤방 등, "밈" 컨텐츠를 모아둔 서비스입니다.
 웹 전반적인 디자인은 꾸준히 수정해나갈 예정이며, 서비스 로직을 우선하여 개발하고 있습니다.
+서비스 주소 - jiho95.duckdns.org
 
-서비스 주소 - http://jiho95.duckdns.org/
+- 시스템 아키텍쳐
+
+![밈장고 인프라](https://github.com/kypa123/MemeFridge/assets/86966661/d25d867c-f8bf-45b1-acb7-f72c79dfa7f0)
+
 
 해당 프로젝트의 주요 개발내용은 다음과 같습니다.
 
@@ -19,9 +23,11 @@
 ![스크린샷 2023-06-21 오후 7 27 38](https://github.com/kypa123/MemeFridge/assets/86966661/a18952c5-868c-4915-890f-8ed9f55b33f9)
 ![스크린샷 2023-06-21 오후 7 28 21](https://github.com/kypa123/MemeFridge/assets/86966661/51f44770-bb85-4e2a-9c92-3a9829762ea0)
 
-    
-    
+      
 3. Docker compose를 활용한 컨테이너 배포
    - redis, postgres, node app을 컨테이너화하여 배포, compose로 네트워크를 형성하여 OCI 클라우드환경에 배포하였습니다.
   https://github.com/kypa123/MemeFridge/blob/master/docker-compose.yml
 
+
+4. Nginx를 활용한 https 적용
+   - 별도의 인스턴스에 docker container를 띄워 nginx를 실행하고, Certbot certificate를 통한 ssl 인증처리로 https를 적용하였습니다.
