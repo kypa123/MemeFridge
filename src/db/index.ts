@@ -1,5 +1,5 @@
-import userModel from './models/user-model.ts'
-import contentModel from './models/content-model.ts'
-import nonMemberContentModel from './models/non-member-content-model.ts'
+import {userModelInstance, UserModel} from './models/user-model.ts'
+import {contentModelInstance, ContentModel} from './models/content-model.ts'
+import {nonMemberContentModelInstance, NonMemberContentModel} from './models/non-member-content-model.ts'
 
-export {userModel, contentModel,nonMemberContentModel};
+export {userModelInstance, contentModelInstance,nonMemberContentModelInstance, UserModel, ContentModel, NonMemberContentModel};

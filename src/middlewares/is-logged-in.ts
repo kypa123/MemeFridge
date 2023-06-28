@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
+import { Response, NextFunction } from 'express'
+import { TokenRequest, UserToken } from '../interfaces/index.ts'
 
-async function isLoggedIn(req, res, next) {
+async function isLoggedIn(req:TokenRequest, res:Response, next:NextFunction) {
     console.log('미들웨어')
     if (!req.cookies.token) {
         res.json({
@@ -14,8 +16,7 @@ async function isLoggedIn(req, res, next) {
             const token = req.cookies.token;
             const tokenInfo = jwt.verify(token, process.env.JWT_SECRET_KEY);
             console.log('정상적으로 토큰을 인식하였습니다')
-            console.log(tokenInfo)
-            req.tokenInfo = tokenInfo;
+            req.tokenInfo = tokenInfo as UserToken;
             next();
         }
         catch(err){

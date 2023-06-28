@@ -1,5 +1,5 @@
-import contentService from './content-service.js';
-import userService from './user-service.js'
-import nonMemberContentService from './non-member-content-service.js'
+import contentService from './content-service.ts';
+import userService from './user-service.ts'
+import nonMemberContentService from './non-member-content-service.ts'
 
 export { contentService, userService, nonMemberContentService };

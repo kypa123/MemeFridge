@@ -1,13 +1,15 @@
-import { Router } from 'express';
-import { userService } from '../services/index.js'
-import { isLoggedIn } from '../middlewares/index.js'
+import { Request, Response, NextFunction, Router } from 'express';
+import { userService } from '../services/index.ts'
+import { isLoggedIn } from '../middlewares/index.ts'
+import { TokenRequest } from '../interfaces/index.ts'
+
 
 const userRouter = Router();
 
-userRouter.get('/', async function(req, res, next){
+userRouter.get('/', async function(req:Request, res:Response, next:NextFunction){
     try{
-        const name = req.query.name;
-        const userInfo = await userService.findUser({name});
+        const name = req.query.name as string;
+        const userInfo = await userService.findUser({name, email: ''});
         res.json(userInfo)
     }
     catch(err){
@@ -15,7 +17,7 @@ userRouter.get('/', async function(req, res, next){
     }
 })
 
-userRouter.post('/', async function(req, res, next){
+userRouter.post('/', async function(req:Request, res:Response, next:NextFunction){
     try{
         const result = await userService.addUser(req.body)
         res.json(result)
@@ -25,7 +27,7 @@ userRouter.post('/', async function(req, res, next){
     }
 })
 
-userRouter.get('/auth', isLoggedIn, async function(req,res,next){
+userRouter.get('/auth', isLoggedIn, async function(req:TokenRequest, res:Response, next:NextFunction){
     try{
         const userInfo = await userService.findUser({name:req.tokenInfo.name, email: req.tokenInfo.email});
         res
@@ -40,7 +42,6 @@ userRouter.get('/auth', isLoggedIn, async function(req,res,next){
 userRouter.post('/auth', async function(req, res, next){
     try{
         const result = await userService.login(req.body);
-        console.log(result)
         if(result.status == 'success'){
             res.cookie('token', result.body,{
                 httpOnly: true,

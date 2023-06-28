@@ -1,5 +1,5 @@
-import upload from "./image-upload.js";
-import errorHandler from "./errorHandler.js";
-import isLoggedIn from "./is-logged-in.js";
+import upload from "./image-upload.ts";
+import errorHandler from "./errorHandler.ts";
+import isLoggedIn from "./is-logged-in.ts";
 
 export { upload, errorHandler, isLoggedIn };

@@ -1,19 +1,17 @@
-import { nonMemberContentModel } from '../db/index.js';
+import { nonMemberContentModelInstance, NonMemberContentModel } from '../db/index.js';
 
 class NonMemberContentService{
-    constructor(nonMemberContentModel){
+    private nonMemberContentModel:NonMemberContentModel
+    constructor(nonMemberContentModel: NonMemberContentModel){
         this.nonMemberContentModel = nonMemberContentModel;
     }
 
-    async addNonMemberContent(nonMemberContentInfo){
+    async addNonMemberContent(nonMemberContentInfo:{uploaderName:string, uploaderPassword:string, contentId:number}){
         try{
-            console.log('논멤버 추가시작')
             const {uploaderName, uploaderPassword, contentId} = nonMemberContentInfo;
             console.log(uploaderName, uploaderPassword, contentId)
             const auth = uploaderName + '_' + uploaderPassword + '_' + contentId.toString();
-            console.log(auth);
             const result = await this.nonMemberContentModel.addNonMemberContent({contentId, auth});
-            console.log('논멤버 결과:',result);
             return result;
         }
         catch(err){
@@ -21,7 +19,7 @@ class NonMemberContentService{
         }
     }
 
-    async deleteNonMemberContent(contentId){
+    async deleteNonMemberContent(contentId:number){
         try{
             const result = await this.nonMemberContentModel.deleteNonMemberContent(contentId);
             return result;
@@ -33,6 +31,6 @@ class NonMemberContentService{
 }
 
 
-const nonMemberContentService = new NonMemberContentService(nonMemberContentModel);
+const nonMemberContentService = new NonMemberContentService(nonMemberContentModelInstance);
 
 export default nonMemberContentService;

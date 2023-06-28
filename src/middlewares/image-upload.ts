@@ -1,5 +1,6 @@
 import { v2 } from 'cloudinary';
-import { utf8Decode } from '../utils/useful-functions.js'
+import { Stream } from 'stream';
+import { InfoObject, FileNameObject } from '../interfaces/index.ts';
 
 const cloudinary = v2;
 cloudinary.config({
@@ -10,14 +11,14 @@ cloudinary.config({
 
 
 
-const upload = function(req, res, next){
+
+const upload = function(req: any, res: any, next: any){
     req.pipe(req.busboy)
 
-    req.busboy.on('field',(fieldname,value,info)=>{
+    req.busboy.on('field',(fieldname:string,value:string,info:InfoObject)=>{
         req.body = {...req.body, [fieldname]:value}
     })
-    req.busboy.on('file', async function(fieldname, file, filename){
-        filename = utf8Decode(filename.filename)
+    req.busboy.on('file', async function(fieldname:string, file:Stream, filename:FileNameObject){
         file.pipe(cloudinary.uploader.upload_stream({folder:'images'},(err,result)=>{
             if (err){
                 console.log(err)

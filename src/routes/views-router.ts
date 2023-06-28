@@ -22,7 +22,7 @@ viewsRouter.use('/my-page',serveStatic('my-page'));
 
 viewsRouter.use('/',serveStatic(''));
 
-function serveStatic(resource) {
+function serveStatic(resource:string) {
     const resourcePath = path.join(__dirname, `../views/${resource}`);
     const option = { index: `${resource}.html` };
     return express.static(resourcePath, option);

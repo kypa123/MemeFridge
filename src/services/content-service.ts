@@ -1,50 +1,48 @@
-import { contentModel } from '../db/index.js'
+import { contentModelInstance, ContentModel } from '../db/index.ts'
 import { createClient } from 'redis';
 
 class ContentService{
-    constructor(contentModel, createClient){
+    private contentModel: ContentModel; 
+    private createClient: Function;
+    constructor(contentModel:ContentModel, createClient:Function){
         this.contentModel = contentModel;
         this.createClient = createClient
     }
 
-    async addContent(contentInfo){
+    async addContent(contentInfo:{ name: string; tag: string; uploaderId: number; url: string; login: boolean; }){
         // 중복제거를 위한 로직 필요, 이미 존재하는 컨텐츠명 등
         const result = await this.contentModel.addContent(contentInfo);
         return result
     }
 
-    async findByOffset(offset){
+    async findByOffset(offset:number){
         const result = await this.contentModel.findByOffset(offset*4);
         return result;
     }
 
-    async findByContentId(id){
+    async findByContentId(id:number){
         const result = await this.contentModel.findByContentId(id);
         return result;
     }
 
-    async findByTags(tags){
+    async findByTags(tags:string[]){
         const result = await this.contentModel.findByTags(tags);
         return result;
     }
 
-    async findByUserId(userId){
+    async findByUserId(userId:number){
         const result = await this.contentModel.findByUserId(userId);
         return result
     }
-    async updateContent(contentInfo){
-        const result = await this.contentModel.updateContent(contentInfo);
-        return result;
-    }
-
-    async deleteContent(contentId){
+    
+    async deleteContent(contentId:number){
         const result = await this.contentModel.deleteContent(contentId);
         return result;
     }
     async updateCacheRankData(){
         try{
             const rankData = await this.contentModel.getRankContents();
-            const client = createClient({
+            const client = this.createClient({
                 url: process.env.REDIS_CONNECTION
               });
             await client.connect();
@@ -64,7 +62,7 @@ class ContentService{
 
     async getCacheRankData(){
         try{
-            const client = createClient({
+            const client = this.createClient({
                 url: process.env.REDIS_CONNECTION
               });
             await client.connect();
@@ -83,6 +81,6 @@ class ContentService{
 }
 
 
-const contentService = new ContentService(contentModel, createClient);
+const contentService = new ContentService(contentModelInstance, createClient);
 
 export default contentService;

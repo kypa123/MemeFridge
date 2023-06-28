@@ -64,6 +64,6 @@ class UserModel{
     }
 }
 
-const userModel = new UserModel(connectionInfo);
+const userModelInstance = new UserModel(connectionInfo);
 
-export default userModel;
+export {userModelInstance, UserModel};

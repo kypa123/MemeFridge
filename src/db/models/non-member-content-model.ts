@@ -35,6 +35,6 @@ class NonMemberContentModel{
     }
 }
 
-const nonMemberContentModel = new NonMemberContentModel(connectionInfo);
+const nonMemberContentModelInstance = new NonMemberContentModel(connectionInfo);
 
-export default nonMemberContentModel;
+export {nonMemberContentModelInstance, NonMemberContentModel};

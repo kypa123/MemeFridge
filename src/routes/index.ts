@@ -1,5 +1,5 @@
-import userRouter from './user-router.js';
-import viewsRouter from './views-router.js';
-import contentRouter from './content-router.js';
+import userRouter from './user-router.ts';
+import viewsRouter from './views-router.ts';
+import contentRouter from './content-router.ts';
 
 export {userRouter, viewsRouter, contentRouter};

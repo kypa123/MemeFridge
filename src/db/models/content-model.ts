@@ -1,7 +1,7 @@
 import pg from 'pg';
 import connectionInfo from '../connectionInfo.js';
 
-export class ContentModel{
+class ContentModel{
     private connectionInfo: string
     constructor(connectionInfo:string){
         this.connectionInfo = connectionInfo;
@@ -107,6 +107,6 @@ export class ContentModel{
     }
 }
 
-const contentModel = new ContentModel(connectionInfo);
+const contentModelInstance = new ContentModel(connectionInfo);
 
-export default contentModel
+export {contentModelInstance, ContentModel}
