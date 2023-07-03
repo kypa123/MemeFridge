@@ -14,7 +14,7 @@
 1. multipart formdata를 readableStream으로, 서버에 저장하지 않고 Cloudinary 이미지 저장소에 업로드
   - Node.js환경의 업로드는 많은 상황에서 Multer 모듈을 활용하여 서버에 한 차례 저장하고, 저장된 path를 기준으로 데이터를 업로드하는 2단계 과정을 거칩니다.
   - 이러한 서버의 부하를 줄이고자 connect-busboy 모듈을 사용해 formData를 on 함수로 file, field 이벤트를 통해 stream parse 단계를 거쳐 form data를 처리했습니다
-    https://github.com/kypa123/MemeFridge/blob/master/src/middlewares/image-upload.js
+    https://github.com/kypa123/MemeFridge/blob/master/src/middlewares/image-upload.ts
     
 2. Redis를 활용하여 상위권 랭킹 4개의 데이터를 cache하고, main 화면에서 랭크 데이터를 빠르게 가져옴
   - 랭킹은 컨텐츠의 조회수를 기준으로 매겨지며, main 페이지를 로드할 때 마다 데이터를 순위로 정렬하지 않기 위해 redis를 채용하였습니다.
