@@ -1,6 +1,8 @@
 import { userModelInstance, UserModel } from '../db/index.ts';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import * as configFile from '../config/index.ts'
+
 
 class UserService{
     private userModel: UserModel
@@ -67,13 +69,13 @@ class UserService{
                 const user = result.rows[0]
                 const res = await bcrypt.compare(userInfo.password, user.password)
                 if (res){
-                    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+                    const secretKey = configFile.default.jwtSecret || 'secret-key';
                     const jwtToken = jwt.sign({
                         name:user.name, email:user.email
                         }, 
                         secretKey,
                         {
-                            expiresIn: process.env.JWT_EXPIRE_DATE
+                            expiresIn: configFile.default.jwtExpire
                     })
                     return {status:'success', body: jwtToken}
                 }

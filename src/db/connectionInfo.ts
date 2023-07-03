@@ -1,7 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import * as configFile from '../config/index.ts'
 
-const connectionInfo = process.env.POSTGRES_CONNECTION
+const connectionInfo = configFile.default.postgresURL
 
 
 export default connectionInfo

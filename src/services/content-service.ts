@@ -1,5 +1,6 @@
 import { contentModelInstance, ContentModel } from '../db/index.ts'
 import { createClient } from 'redis';
+import * as configFile from '../config/index.ts'
 
 class ContentService{
     private contentModel: ContentModel; 
@@ -43,7 +44,7 @@ class ContentService{
         try{
             const rankData = await this.contentModel.getRankContents();
             const client = this.createClient({
-                url: process.env.REDIS_CONNECTION
+                url: configFile.default.redisURL
               });
             await client.connect();
             if(client.isOpen){
@@ -63,7 +64,7 @@ class ContentService{
     async getCacheRankData(){
         try{
             const client = this.createClient({
-                url: process.env.REDIS_CONNECTION
+                url: configFile.default.redisURL
               });
             await client.connect();
             if(client.isOpen){
