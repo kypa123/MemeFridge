@@ -3,11 +3,11 @@ import * as Api from '../api.js';
 const container = document.getElementById('all-contents');
 const rankContainer = document.getElementById('rank-contents');
 const offsetButton = document.getElementById('offset-button');
-
+const recentTag = document.getElementById('recent-tag');
 
 async function loadRankContent(){
     try{
-        const result = await Api.get('/contents','/rank');
+        const result = await Api.get('/contents','/rank/zzal');
         const row = document.createElement('div');
         row.className = "row"
         result.forEach(el=>{
@@ -100,8 +100,27 @@ async function loadContentByOffset(e){
         }
 }
 
+async function loadRecentTag(){
+    try{
+        const result = await Api.get('/contents','/rank/tags');
+        result.forEach(el=>{
+            const span = document.createElement('span');
+            span.className = 'tag is-medium is-white';
+            const link = document.createElement('a');
+            link.href = `/search/tags/${el}`
+            span.innerText = el;
+            link.appendChild(span)
+            recentTag.appendChild(link)
+        });
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 
 loadRankContent()
 loadMainContent()
+loadRecentTag()
 
 offsetButton.addEventListener('click',loadContentByOffset);
