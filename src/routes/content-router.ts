@@ -7,7 +7,9 @@ const contentRouter = Router();
 
 contentRouter.get('/', asyncHandler(contentController.getContentsByOffset));
 
-contentRouter.get('/rank', asyncHandler(contentController.getRankData));
+contentRouter.get('/rank/zzal', asyncHandler(contentController.getRankData));
+
+contentRouter.get('/rank/tags', asyncHandler(contentController.getRecentTags))
 
 contentRouter.get('/id', asyncHandler(contentController.getContentsById));
 

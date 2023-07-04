@@ -13,10 +13,16 @@ export async function getRankData(req:Request, res:Response){
     res.json(result)
 }
 
+export async function getRecentTags(req: Request, res:Response){
+    const result = await contentService.getRecentTagsData();
+    res.json(result);
+}
+
 export async function getContentsById(req:Request, res:Response){
     const id = parseInt(req.query.id as string);
     const result = await contentService.findByContentId(id);
     await contentService.updateCacheRankData();
+    await contentService.updateRecentTagsData(result.tag.split(' ')[0])
     res.json(result.rows[0]);
 }
 
