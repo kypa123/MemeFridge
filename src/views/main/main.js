@@ -105,13 +105,15 @@ async function loadRecentTag(){
         const result = await Api.get('/contents','/rank/tags');
         const recentTagsList = await result.split(' ')
         recentTagsList.forEach(el=>{
-            const span = document.createElement('span');
-            span.className = 'tag is-medium is-white';
-            const link = document.createElement('a');
-            link.href = `/search/tags/${el}`
-            span.innerText = el;
-            link.appendChild(span)
-            recentTag.appendChild(link)
+            if (el != ''){
+                const span = document.createElement('span');
+                span.className = 'tag is-medium is-white';
+                const link = document.createElement('a');
+                link.href = `/search/tags/${el}`
+                span.innerText = el;
+                link.appendChild(span)
+                recentTag.appendChild(link)
+            }
         });
     }
     catch(err){
