@@ -103,7 +103,8 @@ async function loadContentByOffset(e){
 async function loadRecentTag(){
     try{
         const result = await Api.get('/contents','/rank/tags');
-        result.forEach(el=>{
+        const recentTagsList = await result.split(' ')
+        recentTagsList.forEach(el=>{
             const span = document.createElement('span');
             span.className = 'tag is-medium is-white';
             const link = document.createElement('a');
