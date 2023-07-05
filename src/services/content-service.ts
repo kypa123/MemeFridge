@@ -84,25 +84,29 @@ class ContentService{
             const client = this.createClient({
                 url: configFile.default.redisURL
             });
-            if(client.isOpen) return client.get('recentTags');
+            await client.connect();
+            if(client.isOpen) return await client.get('recentTags');
         }
         catch(err){
             console.log(err)
         }
     }
 
-    async updateRecentTagsData(newTags:string[]){
+    async updateRecentTagsData(newTag: string){
         try{
+            console.log('최근태그 newTag:',newTag)
             const client = this.createClient({
                 url: configFile.default.redisURL
             });
+            await client.connect()
             if(client.isOpen){
-                const recentTagsList = client.get("recentTags") || []
-                newTags.forEach(tag=>{
-                    if(!recentTagsList.includes(tag)) recentTagsList.push(tag)
-                    if (recentTagsList.length()>11) recentTagsList.shift()
-                })
-                client.set("recentTags", recentTagsList)
+                const recentTags = await client.get("recentTags") || ""
+                const recentTagsList = recentTags.split(' ')
+                if(!recentTagsList.includes(newTag)) recentTagsList.push(newTag)
+                if (recentTagsList.length>20) recentTagsList.shift()
+                const newRecentTags = recentTagsList.reduce((acc:string, cur:string)=> `${acc} ${cur}`, '')
+                const res = client.set("recentTags", newRecentTags)
+                console.log(res)
                 return;
             }
         }
