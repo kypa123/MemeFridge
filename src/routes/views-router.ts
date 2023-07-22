@@ -19,6 +19,8 @@ viewsRouter.use('/login',serveStatic('login'));
 viewsRouter.use('/search/tags/:tags',serveStatic('search'));
 viewsRouter.use('/content-add',serveStatic('content-add'));
 viewsRouter.use('/my-page',serveStatic('my-page'));
+viewsRouter.use('/buzzword',serveStatic('buzzword'));
+
 
 viewsRouter.use('/',serveStatic(''));
 
