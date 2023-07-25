@@ -1,6 +1,5 @@
-import * as configFile from '../config/index.ts'
+import * as configFile from '../config/index.ts';
 
-const connectionInfo = configFile.default.postgresURL
+const connectionInfo = configFile.default.postgresURL;
 
-
-export default connectionInfo
+export default connectionInfo;

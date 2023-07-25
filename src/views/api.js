@@ -9,19 +9,18 @@ async function get(endpoint, params = '') {
 // api 로 POST 요청 (/endpoint 로, JSON 데이터 형태로 요청함)
 async function post(endpoint, data, contentType = '') {
     const apiUrl = endpoint;
-    if(contentType == "meme"){
+    if (contentType == 'meme') {
         const res = await fetch(apiUrl, {
             method: 'POST',
             body: data,
         });
         return await res.json();
-    }
-    else{
+    } else {
         const bodyData = JSON.stringify(data);
         const res = await fetch(apiUrl, {
             method: 'POST',
-            headers : {
-                'Content-Type': 'application/json'
+            headers: {
+                'Content-Type': 'application/json',
             },
             body: bodyData,
         });

@@ -1,17 +1,21 @@
 import { Router } from 'express';
-import { isLoggedIn, asyncHandler } from '../middlewares/index.ts'
-import { userController } from '../controller/index.ts'
+import { isLoggedIn, asyncHandler } from '../middlewares/index.ts';
+import { userController } from '../controller/index.ts';
 
 const userRouter = Router();
 
-userRouter.get('/', asyncHandler(userController.getUser))
+userRouter.get('/', asyncHandler(userController.getUser));
 
-userRouter.post('/', asyncHandler(userController.addUser))
+userRouter.post('/', asyncHandler(userController.addUser));
 
-userRouter.get('/auth', isLoggedIn, asyncHandler(userController.getLoggedInUser))
+userRouter.get(
+    '/auth',
+    isLoggedIn,
+    asyncHandler(userController.getLoggedInUser),
+);
 
-userRouter.post('/auth', asyncHandler(userController.login))
+userRouter.post('/auth', asyncHandler(userController.login));
 
-userRouter.post('/logout', asyncHandler(userController.logout))
+userRouter.post('/logout', asyncHandler(userController.logout));
 
-export default userRouter
+export default userRouter;

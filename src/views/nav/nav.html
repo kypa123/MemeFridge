@@ -1,49 +1,66 @@
 <nav class="navbar has-shadow is-transparent">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/main" id="main-logo-container">
-        <img src="/images/fridge.svg" alt="failed to load logo" width="100%">
-      </a>
-      <a role="button" class="navbar-burger" data-target="main-navbar">
-          <span></span>
-          <span></span>
-          <span></span>
-      </a>
+        <a class="navbar-item" href="/main" id="main-logo-container">
+            <img
+                src="/images/fridge.svg"
+                alt="failed to load logo"
+                width="100%"
+            />
+        </a>
+        <a role="button" class="navbar-burger" data-target="main-navbar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
     </div>
     <div class="navbar-item search-section">
-      <form id="search-container">
-        <input class="input is-primary is-focused" id="search-input" type="text" placeholder="검색">
-        <button class="button is-secondary" id ="search-submit-button" type="submit">
-          <span class="icon">
-            <i class="fas fa-search"></i>
-          </span>
-        </button>
-      </form>
+        <form id="search-container">
+            <input
+                class="input is-primary is-focused"
+                id="search-input"
+                type="text"
+                placeholder="검색"
+            />
+            <button
+                class="button is-secondary"
+                id="search-submit-button"
+                type="submit"
+            >
+                <span class="icon">
+                    <i class="fas fa-search"></i>
+                </span>
+            </button>
+        </form>
     </div>
 
     <div id="main-navbar" class="navbar-menu">
-      <div class="navbar-end">    
-        <div class="navbar-item">
-          <p class="control">
-            <button class="button is-white" id='content-upload-button' onclick="location.href='/content-add/content-add.html'">
-              <span class="icon">
-                <i class="fas fa-plus"></i>
-              </span>
-              <span>추가하기</span>
-            </button>
-          </p>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <p class="control">
+                    <button
+                        class="button is-white"
+                        id="content-upload-button"
+                        onclick="location.href='/content-add/content-add.html'"
+                    >
+                        <span class="icon">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span>추가하기</span>
+                    </button>
+                </p>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    <span class="icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span id="navbar-user"> 로그인 </span>
+                </a>
+                <div
+                    class="navbar-dropdown is-right"
+                    id="navbar-auth-dropdown"
+                ></div>
+            </div>
         </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            <span class="icon">
-              <i class="fas fa-user"></i>
-            </span>
-            <span id="navbar-user">
-              로그인
-            </span>
-          </a>
-          <div class="navbar-dropdown is-right" id="navbar-auth-dropdown">
-          </div>
-        </div>
-      </div>
     </div>
-  </nav>
+</nav>

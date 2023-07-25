@@ -1,8 +1,8 @@
 #sign-up-form-container {
     height: 60vh;
-    text-align: center;    
+    text-align: center;
     margin-top: 8%;
-  }
+}
 
 .sign-up-form .sign-up-greeting {
     text-align: center;
@@ -10,17 +10,16 @@
     color: #4a4f5a;
     margin-top: 2vh;
 }
-.sign-up-form{
+.sign-up-form {
     width: 28rem;
     margin: auto;
     margin-top: 5vh;
 }
 
 .sign-up-form .input:focus {
-    border-color: hsl(171,100%,41%);
+    border-color: hsl(171, 100%, 41%);
     box-shadow: 0 0 0 0.125em hsl(171, 100%, 43%);
 }
-
 
 .sign-up-form .field {
     display: flex;
@@ -34,7 +33,6 @@
     color: #4a4f5a;
 }
 
-
-#sign-up-submit-button{
+#sign-up-submit-button {
     margin-top: 5vh;
 }
