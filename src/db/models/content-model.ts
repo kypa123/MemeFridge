@@ -68,18 +68,9 @@ class ContentModel {
                     'left join zzals z on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
-                    'left join zzals_count zc on z.title = zc.title' +
-                    `where id = ${contentId};`,
+                    'left join zzals_count zc on z.title = zc.title ' +
+                    `where id = ${contentId}`,
             );
-            const query =
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                'left join zzals z on c.id = z.content_id ' +
-                'left join tags t on c.id = t.content_id ' +
-                'left join zzals_url zu on z.title = zu.title ' +
-                'left join zzals_count zc on z.title = zc.title' +
-                `where id = ${contentId};`;
-            console.log('query:', query);
-            console.log('res:', result);
             await connection.end();
             return result;
         } catch (err) {
@@ -96,7 +87,7 @@ class ContentModel {
                     'left join zzals z on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
-                    'left join zzals_count zc on z.title = zc.title' +
+                    'left join zzals_count zc on z.title = zc.title ' +
                     `where c.creator = ${userId};`,
             );
             await connection.end();
@@ -121,9 +112,7 @@ class ContentModel {
             );
             query += string;
             query = query.slice(0, -5);
-            console.log('query:', query);
             const result = await connection.query(query);
-            console.log('res:', result);
             await connection.end();
             return result;
         } catch (err) {

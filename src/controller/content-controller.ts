@@ -24,7 +24,7 @@ export async function getRecentTags(req: Request, res: Response) {
 export async function getContentsById(req: Request, res: Response) {
     const id = parseInt(req.query.id as string);
     const result = await contentService.findByContentId(id);
-    const newTag = result.rows[0].tag.split(' ')[0];
+    const newTag = result.rows[0].tags.split(' ')[0];
     await contentService.updateCacheRankData();
     await contentService.updateRecentTagsData(newTag);
 

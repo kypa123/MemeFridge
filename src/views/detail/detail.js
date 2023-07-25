@@ -9,11 +9,11 @@ async function dataInsert() {
     try {
         const contentId = location.pathname.split('/')[2];
         const result = await Api.get('/contents/id', `?id=${contentId}`);
-        console.log(result);
+        console.log('res:', result);
         if (result) {
-            title.innerText = result.title || result.tag;
+            title.innerText = result.title || result.tags;
             img.src = result.url;
-            const tags = result.tag.split(' ');
+            const tags = result.tags.split(' ');
             tags.forEach(t => {
                 const span = document.createElement('span');
                 span.className = 'tag is-primary';
