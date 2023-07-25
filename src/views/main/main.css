@@ -69,3 +69,23 @@ a{
     width: 20%;
     margin: auto;
 }
+
+#recent-tag-container{
+    margin: auto;
+    text-align: center;
+    max-width: 980px;
+}
+
+#recent-tag{
+    margin: 30px;
+    /* display: flex; */
+}
+
+
+#recent-tag-container #recent-tag .tag{
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    font-weight:bold;
+    padding: 10px;
+    margin: 2px;
+}
