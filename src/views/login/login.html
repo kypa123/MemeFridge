@@ -1,56 +1,79 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>로그인</title>
-    <script src="./login.js" type="module"></script>
-    <link rel="stylesheet" href="./login.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="/footer/footer.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="/nav/nav.js" type="module"></script>
-    <link rel="stylesheet" href="/nav/nav.css">
-</head>
-<body>
-    <!-- navigation bar -->
-    <div id="nav-placeholder"></div>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>로그인</title>
+        <script src="./login.js" type="module"></script>
+        <link rel="stylesheet" href="./login.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+        />
+        <link rel="stylesheet" href="/footer/footer.css" />
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script
+            defer
+            src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+        ></script>
+        <script src="/nav/nav.js" type="module"></script>
+        <link rel="stylesheet" href="/nav/nav.css" />
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <div id="nav-placeholder"></div>
 
-    <div id="login-form-container">
-        
-        <form class="login-form box">
-            <div class="login-greeting-container">
-                <h1 class="login-greeting">로그인</h1>
-            </div>
+        <div id="login-form-container">
+            <form class="login-form box">
+                <div class="login-greeting-container">
+                    <h1 class="login-greeting">로그인</h1>
+                </div>
 
-            <div class="field">
-              <label class="label">이메일</label>
-              <p class="control has-icons-left">
-                <input class="input" id="email-input" type="email" placeholder="abcd@example.com" autocomplete="on">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                  </span>
-              </p>
-            </div>
-          
-            <div class="field">
-              <label class="label">비밀번호</label>
-                <p class="control has-icons-left">
-                <input class="input" id="password-input" type="password" placeholder="********" autocomplete="off">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                  </span>
-                </p>
-            </div>
-          
-            <button id="login-submit-button" class="button is-primary" type="submit">가입하기</button>
-        </form>
-    </div>
+                <div class="field">
+                    <label class="label">이메일</label>
+                    <p class="control has-icons-left">
+                        <input
+                            class="input"
+                            id="email-input"
+                            type="email"
+                            placeholder="abcd@example.com"
+                            autocomplete="on"
+                        />
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </p>
+                </div>
 
+                <div class="field">
+                    <label class="label">비밀번호</label>
+                    <p class="control has-icons-left">
+                        <input
+                            class="input"
+                            id="password-input"
+                            type="password"
+                            placeholder="********"
+                            autocomplete="off"
+                        />
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
 
-    <!-- footer -->
-    <div id="footer-placeholder"></div>
-    <script>
-        $('#footer-placeholder').load('/footer/footer.html');
-    </script>
-</body>
+                <button
+                    id="login-submit-button"
+                    class="button is-primary"
+                    type="submit"
+                >
+                    가입하기
+                </button>
+            </form>
+        </div>
+
+        <!-- footer -->
+        <div id="footer-placeholder"></div>
+        <script>
+            $('#footer-placeholder').load('/footer/footer.html');
+        </script>
+    </body>
 </html>

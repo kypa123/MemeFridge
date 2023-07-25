@@ -1,44 +1,54 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>밈장고</title>
-    <script src="/main/main.js" type="module"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="/footer/footer.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="/nav/nav.js" type="module"></script>
-    <link rel="stylesheet" href="/nav/nav.css">
-</head>
-<body>
-    <!-- navigation bar -->
-    <div id="nav-placeholder"></div>    
-    
-    <div class="main-page-container">
-        <div id="content-container" class="container is-widescreen">
-            
-            <div id="rank-content-container">
-                <div id="rank-content-title-box" class="box">실시간 랭킹 컨텐츠</div>
-                <div id="rank-contents"></div>
-            </div>
-            <div id="recent-tag-container">
-                <div id="recent-tag"></div>
-            </div>
-            <div id="all-content-container">
-                <div id="all-content-title-box" class="box">전체 컨텐츠</div>
-                <div id="all-contents"></div>
-            </div>
-        </div>
-        <button class="button is-medium is-fullwidth" id="offset-button">더 보기</button>
-    </div>
-    <!-- footer -->
-    <div id="footer-placeholder"></div>
-    
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>밈장고</title>
+        <script src="/main/main.js" type="module"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+        />
+        <link rel="stylesheet" href="/footer/footer.css" />
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script
+            defer
+            src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+        ></script>
+        <script src="/nav/nav.js" type="module"></script>
+        <link rel="stylesheet" href="/nav/nav.css" />
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <div id="nav-placeholder"></div>
 
-    <script>
-        $('#footer-placeholder').load('/footer/footer.html');
-    </script>
-    <link rel="stylesheet" href="/main/main.css">
-    
-</body>
+        <div class="main-page-container">
+            <div id="content-container" class="container is-widescreen">
+                <div id="rank-content-container">
+                    <div id="rank-content-title-box" class="box">
+                        실시간 랭킹 컨텐츠
+                    </div>
+                    <div id="rank-contents"></div>
+                </div>
+                <div id="recent-tag-container">
+                    <div id="recent-tag"></div>
+                </div>
+                <div id="all-content-container">
+                    <div id="all-content-title-box" class="box">
+                        전체 컨텐츠
+                    </div>
+                    <div id="all-contents"></div>
+                </div>
+            </div>
+            <button class="button is-medium is-fullwidth" id="offset-button">
+                더 보기
+            </button>
+        </div>
+        <!-- footer -->
+        <div id="footer-placeholder"></div>
+
+        <script>
+            $('#footer-placeholder').load('/footer/footer.html');
+        </script>
+        <link rel="stylesheet" href="/main/main.css" />
+    </body>
 </html>

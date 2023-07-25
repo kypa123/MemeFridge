@@ -1,28 +1,27 @@
-#main-logo-container{
+#main-logo-container {
     margin-left: 1vh;
 }
 
-.search-section{
+.search-section {
     position: fixed;
     top: 0;
     right: 18vw;
 }
 
-
-#search-container{
+#search-container {
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
     max-width: 30vw;
 }
 
-.navbar{
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
 
-body{
+body {
     padding-top: 5px;
 }

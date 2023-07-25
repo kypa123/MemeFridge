@@ -8,4 +8,4 @@ function errorHandler(err, req, res, next) {
     res.render('error');
 }
 
-export default errorHandler
+export default errorHandler;
