@@ -23,8 +23,9 @@ export async function getRecentTags(req: Request, res: Response) {
 
 export async function getContentsById(req: Request, res: Response) {
     const id = parseInt(req.query.id as string);
+    await contentService.updateContentCount(id);
     const result = await contentService.findByContentId(id);
-    const newTag = result.rows[0].tag.split(' ')[0];
+    const newTag = result.rows[0].tags.split(' ')[0];
     await contentService.updateCacheRankData();
     await contentService.updateRecentTagsData(newTag);
 
@@ -58,7 +59,6 @@ export async function addContent(req: Request, res: Response) {
             tag,
             url: imageURL,
             uploaderId: user.res[0].id,
-            login: true,
         });
         res.json(result);
     }
@@ -69,7 +69,6 @@ export async function addContent(req: Request, res: Response) {
             tag,
             url: imageURL,
             uploaderId: 0,
-            login: false,
         });
         const nonMemberResult =
             await nonMemberContentService.addNonMemberContent({

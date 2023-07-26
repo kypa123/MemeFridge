@@ -22,7 +22,7 @@ async function loadMyPageContent() {
     console.log(resultContent);
     resultContent.forEach(el => {
         let tag = '';
-        el.tag
+        el.tags
             .split(' ')
             .slice(0, 3)
             .forEach(t => {

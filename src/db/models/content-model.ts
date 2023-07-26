@@ -11,7 +11,13 @@ class ContentModel {
         try {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query('select * from contents;');
+            const result = await connection.query(
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                    'left join zzals z on c.id = z.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join zzals_url zu on z.title = zu.title ' +
+                    'left join zzals_count zc on z.title = zc.title;',
+            );
             await connection.end();
             return result;
         } catch (err) {
@@ -24,7 +30,28 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                `select * from contents order by id limit 4 offset ${offset};`,
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                    'left join zzals z on c.id = z.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join zzals_url zu on z.title = zu.title ' +
+                    'left join zzals_count zc on z.title = zc.title ' +
+                    `order by c.id limit 4 offset ${offset};`,
+            );
+            await connection.end();
+            return result;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    async updateByContentId(contentId: number) {
+        try {
+            const connection = new pg.Client(this.connectionInfo);
+            await connection.connect();
+            const result = await connection.query(
+                'update zzals_count ' +
+                    'set count = count + 1 ' +
+                    `where title = (select title from zzals where content_id = ${contentId});`,
             );
             await connection.end();
             return result;
@@ -37,7 +64,12 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                `update contents set count = count + 1 where id=${contentId} returning *;`,
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                    'left join zzals z on c.id = z.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join zzals_url zu on z.title = zu.title ' +
+                    'left join zzals_count zc on z.title = zc.title ' +
+                    `where id = ${contentId}`,
             );
             await connection.end();
             return result;
@@ -51,7 +83,12 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                `select * from contents where creator=${userId}`,
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                    'left join zzals z on c.id = z.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join zzals_url zu on z.title = zu.title ' +
+                    'left join zzals_count zc on z.title = zc.title ' +
+                    `where c.creator = ${userId};`,
             );
             await connection.end();
             return result;
@@ -64,9 +101,14 @@ class ContentModel {
         try {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            let query = 'select * from contents where ';
+            let query =
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                'left join zzals z on c.id = z.content_id ' +
+                'left join tags t on c.id = t.content_id ' +
+                'left join zzals_url zu on z.title = zu.title ' +
+                'left join zzals_count zc on z.title = zc.title where ';
             const string = tags.reduce(
-                (acc, curr) => acc + 'tag like ' + "'%" + curr + "%' and ",
+                (acc, curr) => acc + 't.tags like ' + "'%" + curr + "%' and ",
                 '',
             );
             query += string;
@@ -84,15 +126,21 @@ class ContentModel {
         tag: string;
         uploaderId: number;
         url: string;
-        login: boolean;
     }) {
         try {
-            const { name, tag, uploaderId, url, login } = contentInfo;
+            const { name, tag, uploaderId, url } = contentInfo;
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(
-                `insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`,
-            );
+
+            const query = `with contentins as ( insert into contents (creator) values (${uploaderId}) returning id ), 
+            zzalsins as ( insert into zzals(title, content_id) select '${name}', id from contentins returning title ), 
+            tagsins as ( insert into tags (content_id, tags) select id, '${tag}' from contentins ), 
+            zzalscountins as ( insert into zzals_count (title, count) select title, 0 from zzalsins ), 
+            zzalsurlins as (insert into zzals_url (title, url) select title, '${url}' from zzalsins)
+            select id from contentins;
+            `;
+
+            const result = await connection.query(query);
             await connection.end();
             return result;
         } catch (err) {
@@ -105,7 +153,12 @@ class ContentModel {
         const connection = new pg.Client(this.connectionInfo);
         await connection.connect();
         const result = await connection.query(
-            `select * from contents order by count desc limit 4;`,
+            'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
+                'left join zzals z on c.id = z.content_id ' +
+                'left join tags t on c.id = t.content_id ' +
+                'left join zzals_url zu on z.title = zu.title ' +
+                'left join zzals_count zc on z.title = zc.title ' +
+                `order by zc.count desc limit 4;`,
         );
         await connection.end();
         return result.rows;
