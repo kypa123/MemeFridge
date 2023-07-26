@@ -12,7 +12,7 @@ async function loadRankContent() {
         row.className = 'row';
         result.forEach(el => {
             let tag = '';
-            el.tag
+            el.tags
                 .split(' ')
                 .slice(0, 3)
                 .forEach(t => {
@@ -80,7 +80,7 @@ async function loadContentByOffset(e) {
     row.className = 'row';
     result.rows.forEach(el => {
         let tag = '';
-        el.tag
+        el.tags
             .split(' ')
             .slice(0, 3)
             .forEach(t => {

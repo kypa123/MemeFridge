@@ -31,7 +31,7 @@ async function searchDataInsert() {
         const singleRow = result.rows.slice(rowCount, rowCount + 4);
         singleRow.forEach(el => {
             let tag = '';
-            el.tag
+            el.tags
                 .split(' ')
                 .slice(0, 3)
                 .forEach(t => {
