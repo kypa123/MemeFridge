@@ -51,7 +51,7 @@ class ContentModel {
             const result = await connection.query(
                 'update zzals_count ' +
                     'set count = count + 1 ' +
-                    `where title = (select title from zzals' + where content_id = ${contentId});`,
+                    `where title = (select title from zzals where content_id = ${contentId});`,
             );
             await connection.end();
             return result;
@@ -109,6 +109,7 @@ class ContentModel {
                 'left join zzals_count zc on z.title = zc.title where ';
             const string = tags.reduce(
                 (acc, curr) => acc + 't.tags like ' + "'%" + curr + "%' and ",
+                '',
             );
             query += string;
             query = query.slice(0, -5);
@@ -125,15 +126,21 @@ class ContentModel {
         tag: string;
         uploaderId: number;
         url: string;
-        login: boolean;
     }) {
         try {
-            const { name, tag, uploaderId, url, login } = contentInfo;
+            const { name, tag, uploaderId, url } = contentInfo;
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(
-                `insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`,
-            );
+
+            const query = `with contentins as ( insert into contents (creator) values (${uploaderId}) returning id ), 
+            zzalsins as ( insert into zzals(title, content_id) select '${name}', id from contentins returning title ), 
+            tagsins as ( insert into tags (content_id, tags) select id, '${tag}' from contentins ), 
+            zzalscountins as ( insert into zzals_count (title, count) select title, 0 from zzalsins ), 
+            zzalsurlins as (insert into zzals_url (title, url) select title, '${url}' from zzalsins)
+            select id from contentins;
+            `;
+
+            const result = await connection.query(query);
             await connection.end();
             return result;
         } catch (err) {
