@@ -8,7 +8,6 @@ async function isLoggedIn(
     res: Response,
     next: NextFunction,
 ) {
-    console.log('미들웨어');
     if (!req.cookies.token) {
         res.json({
             status: 'error',
