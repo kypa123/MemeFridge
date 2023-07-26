@@ -50,8 +50,10 @@ async function uploadContent(e) {
     try {
         form.set('tag', form.get('tag').trim());
         const result = await Api.post('/contents', form, 'meme');
-        if (result) {
-            alert('업로드 완료!');
+        console.log('resres', result);
+        if (typeof result == String) {
+            alert(typeof result);
+        } else {
             window.location.href = '/main';
         }
     } catch (err) {
