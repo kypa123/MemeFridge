@@ -15,7 +15,6 @@ class ContentService {
         tag: string;
         uploaderId: number;
         url: string;
-        login: boolean;
     }) {
         // 중복제거를 위한 로직 필요, 이미 존재하는 컨텐츠명 등
         const result = await this.contentModel.addContent(contentInfo);
@@ -27,6 +26,10 @@ class ContentService {
         return result;
     }
 
+    async updateContentCount(id: number) {
+        const result = await this.contentModel.updateByContentId(id);
+        return result;
+    }
     async findByContentId(id: number) {
         const result = await this.contentModel.findByContentId(id);
         return result;
@@ -101,7 +104,6 @@ class ContentService {
 
     async updateRecentTagsData(newTag: string) {
         try {
-            console.log('최근태그 newTag:', newTag);
             const client = this.createClient({
                 url: configFile.default.redisURL,
             });
@@ -117,7 +119,6 @@ class ContentService {
                     '',
                 );
                 const res = client.set('recentTags', newRecentTags);
-                console.log(res);
                 return;
             }
         } catch (err) {
