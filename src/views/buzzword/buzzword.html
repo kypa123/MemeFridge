@@ -1,32 +1,110 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>밈장고</title>
-    <script src="/buzzword/buzzword.js" type="module"></script>
-    <link rel="stylesheet" href="/buzzword/buzzword.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
-    <link rel="stylesheet" href="/footer/footer.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="/nav/nav.js" type="module"></script>
-    <link rel="stylesheet" href="/nav/nav.css">
-</head>
-<body>
-    <!-- navigation bar -->
-    <div id="nav-placeholder"></div>    
-    
-    <div class="buzzword-content-container">
-        <div id="content-container" class="container is-widescreen">
-            <div id="all-content-title-box" class="box">전체 컨텐츠</div>
-            <div id="all-contents"></div>
-        </div>
-    </div>
-    <!-- footer -->
-    <div id="footer-placeholder"></div>
-    
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>밈장고</title>
+        <script src="/buzzword/buzzword.js" type="module"></script>
+        <link rel="stylesheet" href="/buzzword/buzzword.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+        />
+        <link rel="stylesheet" href="/footer/footer.css" />
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script
+            defer
+            src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+        ></script>
+        <script src="/nav/nav.js" type="module"></script>
+        <link rel="stylesheet" href="/nav/nav.css" />
+    </head>
+    <body>
+        <!-- navigation bar -->
+        <div id="nav-placeholder"></div>
 
-    <script>
-        $('#footer-placeholder').load('/footer/footer.html');
-    </script>
-</body>
+        <div class="buzzword-main-container">
+            <div class="container is-widescreen">
+                <h1 id="buzzword-intro">
+                    AI가 추천해주는 유행어를 확인해보세요 ~_~
+                </h1>
+            </div>
+            <div
+                id="buzzword-content-container"
+                class="container is-widescreen"
+            >
+                <div id="buzzword-container" class="box">
+                    <hr />
+                    <span
+                        class="buzzword-wrapper"
+                        onclick="if(buzzword_desc1.style.display == 'none')
+                    {buzzword_desc1.style.display = '';}
+                    else{buzzword_desc1.style.display = 'none';}"
+                    >
+                        <span id="buzzword-name" class="buzzword">제목</span>
+
+                        <span id="buzzword-tags" class="buzzword"
+                            >태그1 태그2 태그3</span
+                        >
+                    </span>
+                    <div>
+                        <span
+                            id="buzzword_desc1"
+                            class="buzzword"
+                            style="display: none"
+                            >유행어에 대한 설명입니다 ㅎㅎ;</span
+                        >
+                    </div>
+                    <hr />
+                    <span
+                        class="buzzword-wrapper"
+                        onclick="if(buzzword_desc2.style.display == 'none')
+                    {buzzword_desc2.style.display = '';}
+                    else{buzzword_desc2.style.display = 'none';}"
+                    >
+                        <span id="buzzword-name" class="buzzword">제목</span>
+
+                        <span id="buzzword-tags" class="buzzword"
+                            >태그1 태그2 태그3</span
+                        >
+                    </span>
+                    <div>
+                        <span
+                            id="buzzword_desc2"
+                            class="buzzword"
+                            style="display: none"
+                            >유행어에 대한 설명입니다 ㅎㅎ;</span
+                        >
+                    </div>
+                    <hr />
+                    <span
+                        class="buzzword-wrapper"
+                        onclick="if(buzzword_desc3.style.display == 'none')
+                    {buzzword_desc3.style.display = '';}
+                    else{buzzword_desc3.style.display = 'none';}"
+                    >
+                        <span id="buzzword-name" class="buzzword">제목</span>
+
+                        <span id="buzzword-tags" class="buzzword"
+                            >태그1 태그2 태그3</span
+                        >
+                    </span>
+                    <div>
+                        <span
+                            id="buzzword_desc3"
+                            class="buzzword"
+                            style="display: none"
+                            >유행어에 대한 설명입니다 ㅎㅎ;</span
+                        >
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        <div id="footer-placeholder"></div>
+
+        <script>
+            $('#footer-placeholder').load('/footer/footer.html');
+        </script>
+    </body>
 </html>
