@@ -1,8 +1,6 @@
 import pg from 'pg';
 import connectionInfo from '../connectionInfo.js';
 
-//모델만들고 서비스만들고 비회원 << 이거추가해야되니까 데이터베이스에 컬럼 추가
-
 class BuzzwordModel {
     private connectionInfo: string;
     constructor(connectionInfo: string) {
@@ -14,7 +12,11 @@ class BuzzwordModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                'select b.id, b.name, bc.creator_id as creator, bd.description as descr, bt.tags, b.created_at from buzzwords as b, buzzwords_creator as bc, buzzwords_descr as bd, buzzwords_tags as bt where b.id = bc.buzzword_id and b.id = bd.buzzword_id and b.id = bt.buzzword_id;',
+                'select c.id, c.creator, b.name, bd.description, t.tags, c.created_at ' +
+                    'from buzzwords b ' +
+                    'left join contents c on c.id = b.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join buzzwords_desc bd on bd.name = b.name',
             );
             await connection.end();
             return result;
@@ -28,7 +30,31 @@ class BuzzwordModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                `select * from contents order by id limit 4 offset ${offset};`,
+                'select c.id, c.creator, b.name, bd.description, t.tags, c.created_at ' +
+                    'from buzzwords b ' +
+                    'left join contents c on c.id = b.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join buzzwords_desc bd on bd.name = b.name ' +
+                    `order by c.id limit 4 offset ${offset};`,
+            );
+            await connection.end();
+            return result;
+        } catch (err) {
+            return err;
+        }
+    }
+
+    async findByContentId(contentId: number) {
+        try {
+            const connection = new pg.Client(this.connectionInfo);
+            await connection.connect();
+            const result = await connection.query(
+                'select c.id, c.creator, b.name, bd.description, t.tags, c.created_at ' +
+                    'from buzzwords b ' +
+                    'left join contents c on c.id = b.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join buzzwords_desc bd on bd.name = b.name' +
+                    `where c.id = ${contentId}`,
             );
             await connection.end();
             return result;
@@ -42,7 +68,12 @@ class BuzzwordModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                `select * from contents where creator=${userId}`,
+                'select c.id, c.creator, b.name, bd.description, t.tags, c.created_at ' +
+                    'from buzzwords b ' +
+                    'left join contents c on c.id = b.content_id ' +
+                    'left join tags t on c.id = t.content_id ' +
+                    'left join buzzwords_desc bd on bd.name = b.name' +
+                    `where c.creator = ${userId};`,
             );
             await connection.end();
             return result;
@@ -55,9 +86,14 @@ class BuzzwordModel {
         try {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            let query = 'select * from contents where ';
+            let query =
+                'select c.id, c.creator, b.name, bd.description, t.tags, c.created_at ' +
+                'from buzzwords b ' +
+                'left join contents c on c.id = b.content_id ' +
+                'left join tags t on c.id = t.content_id ' +
+                'left join buzzwords_desc bd on bd.name = b.name where ';
             const string = tags.reduce(
-                (acc, curr) => acc + 'tag like ' + "'%" + curr + "%' and ",
+                (acc, curr) => acc + 't.tags like ' + "'%" + curr + "%' and ",
                 '',
             );
             query += string;
@@ -70,19 +106,25 @@ class BuzzwordModel {
         }
     }
 
-    async addBuzzword(buzzwordInfo: {
+    async addContent(buzzwordInfo: {
         name: string;
         tag: string;
         uploaderId: number;
-        login: boolean;
+        descr: string;
     }) {
         try {
-            const { name, tag, uploaderId, login } = buzzwordInfo;
+            const { name, tag, descr, uploaderId } = buzzwordInfo;
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
-            const result = await connection.query(
-                `insert into contents (title, creator, url, tag, login) values ('${name}', ${uploaderId}, '${url}', '${tag}', '${login}') returning id;`,
-            );
+
+            const query = `with contentins as ( insert into contents (creator) values (${uploaderId}) returning id ), 
+            buzzwordsins as ( insert into buzzwords(name, content_id) select '${name}', id from contentins returning name ), 
+            tagsins as ( insert into tags (content_id, tags) select id, '${tag}' from contentins ), 
+            buzzwordsdescrins as ( insert into buzzwords_descr (name, description) select name, ${descr} from buzzwordsins ), 
+            select id from contentins;
+            `;
+
+            const result = await connection.query(query);
             await connection.end();
             return result;
         } catch (err) {
@@ -91,17 +133,7 @@ class BuzzwordModel {
         }
     }
 
-    async getRankContents() {
-        const connection = new pg.Client(this.connectionInfo);
-        await connection.connect();
-        const result = await connection.query(
-            `select * from contents order by count desc limit 4;`,
-        );
-        await connection.end();
-        return result.rows;
-    }
-
-    async deleteContent(contentId: number) {
+    async deleteBuzzword(contentId: number) {
         const connection = new pg.Client(this.connectionInfo);
         await connection.connect();
         const result = await connection.query(
