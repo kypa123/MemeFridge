@@ -16,7 +16,7 @@ class BuzzwordModel {
                     'from buzzwords b ' +
                     'left join contents c on c.id = b.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
-                    'left join buzzwords_desc bd on bd.name = b.name',
+                    'left join buzzwords_desc bd on bd.buzzword_id = b.id',
             );
             await connection.end();
             return result;
@@ -34,7 +34,7 @@ class BuzzwordModel {
                     'from buzzwords b ' +
                     'left join contents c on c.id = b.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
-                    'left join buzzwords_desc bd on bd.name = b.name ' +
+                    'left join buzzwords_desc bd on bd.buzzword_id = b.id ' +
                     `order by c.id limit 4 offset ${offset};`,
             );
             await connection.end();
@@ -53,7 +53,7 @@ class BuzzwordModel {
                     'from buzzwords b ' +
                     'left join contents c on c.id = b.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
-                    'left join buzzwords_desc bd on bd.name = b.name' +
+                    'left join buzzwords_desc bd on bd.buzzword_id = b.id ' +
                     `where c.id = ${contentId}`,
             );
             await connection.end();
@@ -72,7 +72,7 @@ class BuzzwordModel {
                     'from buzzwords b ' +
                     'left join contents c on c.id = b.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
-                    'left join buzzwords_desc bd on bd.name = b.name' +
+                    'left join buzzwords_desc bd on bd.buzzword_id = b.id ' +
                     `where c.creator = ${userId};`,
             );
             await connection.end();
@@ -91,7 +91,7 @@ class BuzzwordModel {
                 'from buzzwords b ' +
                 'left join contents c on c.id = b.content_id ' +
                 'left join tags t on c.id = t.content_id ' +
-                'left join buzzwords_desc bd on bd.name = b.name where ';
+                'left join buzzwords_desc bd on bd.buzzword_id = b.id where ';
             const string = tags.reduce(
                 (acc, curr) => acc + 't.tags like ' + "'%" + curr + "%' and ",
                 '',
@@ -106,7 +106,7 @@ class BuzzwordModel {
         }
     }
 
-    async addContent(buzzwordInfo: {
+    async addBuzzword(buzzwordInfo: {
         name: string;
         tag: string;
         uploaderId: number;
@@ -114,13 +114,23 @@ class BuzzwordModel {
     }) {
         try {
             const { name, tag, descr, uploaderId } = buzzwordInfo;
+            console.log(
+                'name:',
+                name,
+                'tag:',
+                tag,
+                'descr:',
+                descr,
+                'uploaderId:',
+                uploaderId,
+            );
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
 
             const query = `with contentins as ( insert into contents (creator) values (${uploaderId}) returning id ), 
-            buzzwordsins as ( insert into buzzwords(name, content_id) select '${name}', id from contentins returning name ), 
+            buzzwordsins as ( insert into buzzwords(name, content_id) select '${name}', id from contentins returning id), 
             tagsins as ( insert into tags (content_id, tags) select id, '${tag}' from contentins ), 
-            buzzwordsdescrins as ( insert into buzzwords_descr (name, description) select name, ${descr} from buzzwordsins ), 
+            buzzwordsdescins as ( insert into buzzwords_desc (buzzword_id, description) select id, '${descr}' from buzzwordsins ) 
             select id from contentins;
             `;
 
@@ -133,14 +143,32 @@ class BuzzwordModel {
         }
     }
 
-    async deleteBuzzword(contentId: number) {
+    async deleteBuzzword(buzzwordId: number) {
         const connection = new pg.Client(this.connectionInfo);
         await connection.connect();
         const result = await connection.query(
-            `delete from contents where id=${contentId}`,
+            `delete from contents where id=${buzzwordId}`,
         );
         await connection.end();
         return result.rows;
+    }
+
+    async getLatestBuzzwordId() {
+        const connection = new pg.Client(this.connectionInfo);
+        await connection.connect();
+        const result = await connection.query('select * from latest_buzzword');
+        await connection.end();
+        return result.rows;
+    }
+
+    async setLatestBuzzwordId(latestId: number) {
+        const connection = new pg.Client(this.connectionInfo);
+        await connection.connect();
+        const result = await connection.query(
+            `update latest_buzzword set id=${latestId}`,
+        );
+        await connection.end();
+        return;
     }
 }
 
