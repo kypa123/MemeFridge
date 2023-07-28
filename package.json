@@ -22,6 +22,7 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^9.0.0",
     "morgan": "~1.9.1",
+    "node-fetch": "^3.3.2",
     "nodemon": "^2.0.16",
     "pg": "^8.8.0",
     "redis": "^4.6.5",
