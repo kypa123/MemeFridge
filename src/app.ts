@@ -4,7 +4,12 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectBusboy from 'connect-busboy';
 import errorHandler from './middlewares/errorHandler.js';
-import { viewsRouter, userRouter, contentRouter } from './routes/index.js';
+import {
+    viewsRouter,
+    userRouter,
+    contentRouter,
+    buzzwordRouter,
+} from './routes/index.js';
 
 const app = express();
 app.use(logger('dev'));
@@ -16,6 +21,7 @@ app.use(connectBusboy());
 app.use(viewsRouter);
 app.use('/users', userRouter);
 app.use('/contents', contentRouter);
+app.use('/buzzwords', buzzwordRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
