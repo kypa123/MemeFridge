@@ -12,8 +12,8 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                    'left join zzals z on c.id = z.content_id ' +
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                    'left join contents c on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
                     'left join zzals_count zc on z.title = zc.title;',
@@ -30,8 +30,8 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                    'left join zzals z on c.id = z.content_id ' +
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                    'left join contents c on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
                     'left join zzals_count zc on z.title = zc.title ' +
@@ -64,8 +64,8 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                    'left join zzals z on c.id = z.content_id ' +
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                    'left join contents c on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
                     'left join zzals_count zc on z.title = zc.title ' +
@@ -83,8 +83,8 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             const result = await connection.query(
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                    'left join zzals z on c.id = z.content_id ' +
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                    'left join contents c on c.id = z.content_id ' +
                     'left join tags t on c.id = t.content_id ' +
                     'left join zzals_url zu on z.title = zu.title ' +
                     'left join zzals_count zc on z.title = zc.title ' +
@@ -102,8 +102,8 @@ class ContentModel {
             const connection = new pg.Client(this.connectionInfo);
             await connection.connect();
             let query =
-                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                'left join zzals z on c.id = z.content_id ' +
+                'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                'left join contents c on c.id = z.content_id ' +
                 'left join tags t on c.id = t.content_id ' +
                 'left join zzals_url zu on z.title = zu.title ' +
                 'left join zzals_count zc on z.title = zc.title where ';
@@ -153,8 +153,8 @@ class ContentModel {
         const connection = new pg.Client(this.connectionInfo);
         await connection.connect();
         const result = await connection.query(
-            'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from contents c ' +
-                'left join zzals z on c.id = z.content_id ' +
+            'select c.id, c.creator, z.title, t.tags, zc.count, zu.url, c.created_at from zzals z ' +
+                'left join contents c on c.id = z.content_id ' +
                 'left join tags t on c.id = t.content_id ' +
                 'left join zzals_url zu on z.title = zu.title ' +
                 'left join zzals_count zc on z.title = zc.title ' +
