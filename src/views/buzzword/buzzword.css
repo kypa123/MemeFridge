@@ -3,6 +3,8 @@
 }
 
 .buzzword-main-container {
+    width: 60vw;
+    margin: auto;
     align-items: center;
     align-content: center;
 }
@@ -16,23 +18,39 @@
 }
 
 .buzzword-wrapper {
-    display: flex;
     width: 100%;
-    height: 100px;
+    height: 130px;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 25px auto;
     text-align: center;
 }
 
 .buzzword {
-    width: 33%;
     margin: auto;
-    font-size: 32px;
-    text-align: left;
+    text-align: center;
 }
 
-#buzzword_desc {
+.buzzword_creator {
     width: 100%;
-    height: 50px;
-    text-align: center;
+    font-size: 18px;
+    text-align: right;
+}
+
+.buzzword_name {
+    font-size: 28px;
+}
+
+.buzzword_tags {
+    font-size: 18px;
+    text-align: right;
+}
+.buzzword_desc {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#offset-button {
+    width: 20%;
+    margin: 20px auto;
+    border: none;
 }
