@@ -5,6 +5,12 @@ import {
     nonMemberContentService,
 } from '../services/index.ts';
 
+export async function getBuzzwordsByOffset(req: Request, res: Response) {
+    const offset = Number(req.query.offset);
+    const result = await buzzwordService.findByOffset(offset);
+    res.json(result);
+}
+
 export async function getBuzzwordsFromDataAPI(req: Request, res: Response) {
     const result = await buzzwordService.addDatasFromAPI();
     res.json(result);
