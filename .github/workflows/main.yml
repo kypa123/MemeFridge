@@ -1,0 +1,23 @@
+name: main branch auto ci process srcipt
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: appleboy/ssh-action@v1.0.0
+              with:
+                  host: ${{ secrets.REMOTE_SSH_HOST }}
+                  username: ${{ secrets.REMOTE_SSH_USERNAME }}
+                  key: ${{ secrets.REMOTE_SSH_KEY }}
+                  port: ${{ secrets.REMOTE_SSH_PORT }}
+                  script: |
+                      cd /home/ubuntu/app/MemeFridge
+                      git pull origin master
+                      sudo docker compose stop
+                      sudo docker container prune -f
+                      sudo docker image prune -a -f
+                      sudo docker compose up -d
