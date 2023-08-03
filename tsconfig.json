@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
-      "allowJs": true,
-      "target": "ES6",
-      "outDir": "./dist",
-      "moduleResolution": "Node",
-      "module":"ES2020",
-      "lib": ["ES2015", "DOM", "DOM.Iterable"],
-      "typeRoots": ["./node_modules/@types", "./@types"],
-      "allowSyntheticDefaultImports": true,
-      "allowImportingTsExtensions": true,
-      "noEmit" : true
+        "allowJs": true,
+        "target": "ES6",
+        "outDir": "./dist",
+        "moduleResolution": "Node",
+        "module": "ES2020",
+        "lib": ["ES2015", "DOM", "DOM.Iterable"],
+        "typeRoots": ["./node_modules/@types", "./@types"],
+        "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true
     },
-    "include": ["./src/**/*"],
+    "include": ["./src/**/*", "./test/**/*"],
     "exclude": ["node_modules", "dist"]
 }
