@@ -1,45 +1,53 @@
-import UserModel from '../../src/db/models/user-model.ts';
+import NonMemberContentModel from '../../src/db/models/non-member-content-model.ts';
 import { Pool } from 'pg';
 
 jest.mock('pg');
 
-const mockUserData = {
+const mockNonMemberContentData = {
     command: 'SELECT',
     rowCount: 4,
     oid: null,
     rows: [
         {
             id: 1,
+            creator: 2,
             name: '첫번째',
-            password: '첫번째비번',
-            email: 'first@gmail.com',
+            description: '첫번째설명',
+            tags: '첫번째태그1 첫번째태그2',
+            created_at: '2023-07-28T12:12:55.710Z',
         },
         {
             id: 2,
+            creator: 2,
             name: '두번째',
-            password: '두번째비번',
-            email: 'second@gmail.com',
+            description: '두번째설명',
+            tags: '두번째태그1 두번째태그2',
+            created_at: '2023-07-28T12:12:55.718Z',
         },
         {
             id: 3,
+            creator: 2,
             name: '세번째',
-            password: '세번째비번',
-            email: 'third@gmail.com',
+            description: '세번째 설명',
+            tags: '세번째태그1 세번째태그2',
+            created_at: '2023-07-28T12:12:55.762Z',
         },
         {
             id: 4,
+            creator: 2,
             name: '네번째',
-            password: '네번째비번',
-            email: 'fourth@gmail.com',
+            description: '네번째 설명',
+            tags: '네번째태그1 네번째태그2',
+            created_at: '2023-07-28T12:12:55.764Z',
         },
     ],
 };
 
-it('userModelPoolQuery', async () => {
+it('nonMemberContentModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
     const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
-        query: jest.fn().mockResolvedValue(mockUserData.rows),
+        query: jest.fn().mockResolvedValue(mockNonMemberContentData.rows),
         totalCount: 0,
         idleCount: 0,
         waitingCount: 0,
@@ -61,10 +69,10 @@ it('userModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new UserModel(connectionInfo);
-    const result = await testModel.findUser({
-        name: 'charlie',
-        email: 'crl@gmail.com',
+    const testModel = new NonMemberContentModel(connectionInfo);
+    const result = await testModel.addNonMemberContent({
+        contentId: 1234,
+        auth: 'random',
     });
-    expect(result).toEqual(mockUserData.rows);
+    expect(result).toEqual(mockNonMemberContentData.rows);
 });
