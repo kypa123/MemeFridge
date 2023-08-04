@@ -1,10 +1,11 @@
 import pg from 'pg';
-import connectionInfo from '../connectionInfo.js';
 
-class NonMemberContentModel {
+export default class NonMemberContentModel {
     private connectionInfo: string;
+    private pool: pg.Pool;
     constructor(connectionInfo: string) {
         this.connectionInfo = connectionInfo;
+        this.pool = new pg.Pool({ connectionString: this.connectionInfo });
     }
 
     async addNonMemberContent(nonMemberContentInfo: {
@@ -12,12 +13,10 @@ class NonMemberContentModel {
         auth: string;
     }) {
         try {
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `insert into non_member_contents (content_id, id_pwd) values (${nonMemberContentInfo.contentId},'${nonMemberContentInfo.auth}') returning id;`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             return err;
@@ -26,19 +25,13 @@ class NonMemberContentModel {
 
     async deleteNonMemberContent(contentId: number) {
         try {
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `delete from non_member_contents where content_id = ${contentId};`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             return err;
         }
     }
 }
-
-const nonMemberContentModelInstance = new NonMemberContentModel(connectionInfo);
-
-export { nonMemberContentModelInstance, NonMemberContentModel };

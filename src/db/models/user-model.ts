@@ -1,10 +1,11 @@
 import pg from 'pg';
-import connectionInfo from '../connectionInfo.js';
 
-class UserModel {
+export default class UserModel {
     private connectionInfo: string;
+    private pool: pg.Pool;
     constructor(connectionInfo: string) {
         this.connectionInfo = connectionInfo;
+        this.pool = new pg.Pool({ connectionString: this.connectionInfo });
     }
 
     async findUser(userInfo: { name: string; email: string }) {
@@ -12,12 +13,10 @@ class UserModel {
             const name = userInfo.name || 'no name';
             const email = userInfo.email || 'no email';
 
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `select * from users where name='${name}' or email='${email}'`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             return err;
@@ -30,12 +29,10 @@ class UserModel {
         email: string;
     }) {
         try {
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `insert into users (name, password,email) values ('${userInfo.name}','${userInfo.hashedPassword}','${userInfo.email}') returning id;`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             console.log(err);
@@ -48,12 +45,10 @@ class UserModel {
         id: string;
     }) {
         try {
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `update users set password = '${userInfo.password}', email = '${userInfo.email}' where id = '${userInfo.id}'`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             console.log(err);
@@ -62,19 +57,13 @@ class UserModel {
 
     async deleteUser(userName: string) {
         try {
-            const connection = new pg.Client(this.connectionInfo);
-            await connection.connect();
-            const result = await connection.query(
+            const result = await this.pool.query(
                 `delete from users where name = ${userName}`,
             );
-            await connection.end();
+
             return result;
         } catch (err) {
             console.log(err);
         }
     }
 }
-
-const userModelInstance = new UserModel(connectionInfo);
-
-export { userModelInstance, UserModel };

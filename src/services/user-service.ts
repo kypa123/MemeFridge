@@ -1,9 +1,9 @@
-import { userModelInstance, UserModel } from '../db/index.ts';
+import { UserModel } from '../db/index.ts';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import * as configFile from '../config/index.ts';
 
-class UserService {
+export default class UserService {
     private userModel: UserModel;
     constructor(userModel: UserModel) {
         this.userModel = userModel;
@@ -111,7 +111,3 @@ class UserService {
         }
     }
 }
-
-const userService = new UserService(userModelInstance);
-
-export default userService;

@@ -1,9 +1,6 @@
-import {
-    nonMemberContentModelInstance,
-    NonMemberContentModel,
-} from '../db/index.js';
+import { NonMemberContentModel } from '../db/index.js';
 
-class NonMemberContentService {
+export default class NonMemberContentService {
     private nonMemberContentModel: NonMemberContentModel;
     constructor(nonMemberContentModel: NonMemberContentModel) {
         this.nonMemberContentModel = nonMemberContentModel;
@@ -45,9 +42,3 @@ class NonMemberContentService {
         }
     }
 }
-
-const nonMemberContentService = new NonMemberContentService(
-    nonMemberContentModelInstance,
-);
-
-export default nonMemberContentService;

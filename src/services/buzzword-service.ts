@@ -1,9 +1,8 @@
-import { buzzwordModelInstance, BuzzwordModel } from '../db/index.ts';
-import { createClient } from 'redis';
+import { BuzzwordModel } from '../db/index.ts';
 import * as configFile from '../config/index.ts';
 import * as API from '../utils/api.ts';
 
-class BuzzwordService {
+export default class BuzzwordService {
     private buzzwordModel: BuzzwordModel;
     private createClient: Function;
     constructor(buzzwordModel: BuzzwordModel, createClient: Function) {
@@ -127,10 +126,3 @@ class BuzzwordService {
         }
     }
 }
-
-const buzzwordService = new BuzzwordService(
-    buzzwordModelInstance,
-    createClient,
-);
-
-export default buzzwordService;

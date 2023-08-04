@@ -1,8 +1,7 @@
-import { contentModelInstance, ContentModel } from '../db/index.ts';
-import { createClient } from 'redis';
+import { ContentModel } from '../db/index.ts';
 import * as configFile from '../config/index.ts';
 
-class ContentService {
+export default class ContentService {
     private contentModel: ContentModel;
     private createClient: Function;
     constructor(contentModel: ContentModel, createClient: Function) {
@@ -126,7 +125,3 @@ class ContentService {
         }
     }
 }
-
-const contentService = new ContentService(contentModelInstance, createClient);
-
-export default contentService;
