@@ -1,5 +1,4 @@
-import pg from 'pg';
-import connectionInfo from '../connectionInfo.ts';
+import * as pg from 'pg';
 
 export default class BuzzwordModel {
     private connectionInfo: string;

@@ -1,4 +1,4 @@
-import pg from 'pg';
+import * as pg from 'pg';
 
 export default class UserModel {
     private connectionInfo: string;
