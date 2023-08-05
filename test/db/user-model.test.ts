@@ -36,8 +36,6 @@ const mockUserData = {
 };
 
 it('userModelPoolQuery', async () => {
-    (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
-    const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
         query: jest.fn().mockResolvedValue(mockUserData.rows),
         totalCount: 0,
@@ -61,7 +59,7 @@ it('userModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new UserModel(connectionInfo);
+    const testModel: UserModel = new UserModel(mockPool);
     const result = await testModel.findUser({
         name: 'charlie',
         email: 'crl@gmail.com',

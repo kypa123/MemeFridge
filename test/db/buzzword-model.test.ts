@@ -69,7 +69,7 @@ it('buzzwordModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new BuzzwordModel(connectionInfo);
+    const testModel = new BuzzwordModel(mockPool);
     const result = await testModel.findAll();
     expect(result).toEqual(mockBuzzwordData.rows);
 });

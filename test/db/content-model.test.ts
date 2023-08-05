@@ -50,7 +50,6 @@ const mockContentData = {
 
 it('ContentModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
-    const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
         query: jest.fn().mockResolvedValue(mockContentData.rows),
         totalCount: 0,
@@ -74,7 +73,7 @@ it('ContentModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new ContentModel(connectionInfo);
+    const testModel = new ContentModel(mockPool);
     const result = await testModel.findAll();
     expect(result).toEqual(mockContentData.rows);
 });

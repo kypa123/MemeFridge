@@ -1,11 +1,9 @@
-import * as pg from 'pg';
+import pg from 'pg';
 
 export default class ContentModel {
-    private connectionInfo: string;
     private pool: pg.Pool;
-    constructor(connectionInfo: string) {
-        this.connectionInfo = connectionInfo;
-        this.pool = new pg.Pool({ connectionString: this.connectionInfo });
+    constructor(pool: pg.Pool) {
+        this.pool = pool;
     }
 
     async findAll() {

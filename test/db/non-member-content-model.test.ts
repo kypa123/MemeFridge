@@ -45,7 +45,6 @@ const mockNonMemberContentData = {
 
 it('nonMemberContentModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
-    const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
         query: jest.fn().mockResolvedValue(mockNonMemberContentData.rows),
         totalCount: 0,
@@ -69,7 +68,7 @@ it('nonMemberContentModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new NonMemberContentModel(connectionInfo);
+    const testModel = new NonMemberContentModel(mockPool);
     const result = await testModel.addNonMemberContent({
         contentId: 1234,
         auth: 'random',
