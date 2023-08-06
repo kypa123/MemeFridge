@@ -3,13 +3,13 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import connectBusboy from 'connect-busboy';
-import errorHandler from './middlewares/errorHandler.js';
+import { errorHandler } from './middlewares/index.ts';
 import {
     viewsRouter,
     userRouter,
     contentRouter,
     buzzwordRouter,
-} from './routes/index.js';
+} from './routes/index.ts';
 
 const app = express();
 app.use(logger('dev'));
