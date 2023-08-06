@@ -56,7 +56,7 @@ export default class UserModel {
     async deleteUser(userName: string) {
         try {
             const result = await this.pool.query(
-                `delete from users where name = ${userName}`,
+                `delete from users where name='${userName}'`,
             );
             return result;
         } catch (err) {

@@ -171,7 +171,10 @@ describe('POST /users', () => {
 
 describe('DELETE /users', () => {
     it('아이디를 삭제한다', done => {
-        request(app).delete('/users').expect(200).expect({ message: 'ok' });
+        request(app)
+            .delete('/users?name=randomuser')
+            .expect(200)
+            .expect({ message: 'ok' });
         done();
     });
 });
