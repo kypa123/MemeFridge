@@ -9,7 +9,7 @@ async function isLoggedIn(
     next: NextFunction,
 ) {
     if (!req.cookies.token) {
-        res.json({
+        res.status(403).json({
             status: 'error',
             statusCode: 403,
             message: '로그인되어 있지 않습니다!',

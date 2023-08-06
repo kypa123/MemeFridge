@@ -11,7 +11,11 @@ export async function getUser(req: TokenRequest, res: Response): Promise<void> {
 
 export async function addUser(req: Request, res: Response) {
     const result = await userServiceInstance.addUser(req.body);
-    res.json(result);
+    if (result.message !== undefined) {
+        res.status(409).json(result);
+    } else {
+        res.status(200).json(result);
+    }
 }
 
 export async function getLoggedInUser(req: TokenRequest, res: Response) {
