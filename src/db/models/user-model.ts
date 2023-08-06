@@ -58,7 +58,6 @@ export default class UserModel {
             const result = await this.pool.query(
                 `delete from users where name = ${userName}`,
             );
-
             return result;
         } catch (err) {
             console.log(err);

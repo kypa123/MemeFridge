@@ -43,3 +43,9 @@ export async function logout(req: Request, res: Response) {
     const message = { message: 'ok' };
     res.clearCookie('token').json(message);
 }
+
+export async function deleteUser(req: Request, res: Response) {
+    const userName = req.query.name as string;
+    const result = await userServiceInstance.deleteUser(userName);
+    await res.status(200).json({ message: 'ok' });
+}

@@ -8,6 +8,8 @@ userRouter.get('/', asyncHandler(userController.getUser));
 
 userRouter.post('/', asyncHandler(userController.addUser));
 
+userRouter.delete('/', asyncHandler(userController.deleteUser));
+
 userRouter.get(
     '/auth',
     isLoggedIn,
