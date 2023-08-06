@@ -33,11 +33,16 @@ const config = {
     },
     modulePaths: ['<rootDir>'],
     // The test environment that will be used for testing
-    testEnvironment: 'jest-environment-node',
+    testEnvironment: 'node',
 
     // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-    transformIgnorePatterns: ['<rootDir>/node_modules/'],
+    // transformIgnorePatterns: ['<rootDir>/node_modules/'],
     preset: 'ts-jest',
+    globals: {
+        'ts-jest': {
+            tsconfig: process.cwd() + '/tsconfig.json',
+        },
+    },
 };
 
 export default config;
