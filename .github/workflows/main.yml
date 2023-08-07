@@ -5,7 +5,36 @@ on:
         branches: [master]
 
 jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        env:
+            POSTGRES_CONNECTION: ${{ secrets.POSTGRES_CONNECTION }}
+            REDIS_CONNECTION: ${{ secrets.REDIS_CONNECTION }}
+            CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
+            CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+            CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+            JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
+            JWT_EXPIRE_DATE: ${{ secrets.JWT_EXPIRE_DATE }}
+            DATA_API: ${{ secrets.DATA_API }}
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup@v2
+              with:
+                  node-version: 16
+
+            - name: Install Dependencies
+              run: npm install
+
+            - name: Run Tests
+              run: npm test
+
     deploy:
+        needs: test
         runs-on: ubuntu-latest
         steps:
             - uses: appleboy/ssh-action@v1.0.0
