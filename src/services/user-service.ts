@@ -63,9 +63,13 @@ export default class UserService {
         return user;
     }
 
-    async deleteUser(userId: string) {
-        const result = await this.userModel.deleteUser(userId);
-        return result;
+    async deleteUser(userName: string) {
+        const result = await this.userModel.deleteUser(userName);
+        if (result.rowCount == 1) {
+            return { status: 200, message: 'ok' };
+        } else {
+            return { status: 404, message: 'failed to delete user' };
+        }
     }
 
     async login(userInfo: { email: string; password: string }) {

@@ -11,7 +11,7 @@ export async function getUser(req: TokenRequest, res: Response): Promise<void> {
 
 export async function addUser(req: Request, res: Response) {
     const result = await userServiceInstance.addUser(req.body);
-    if (result.message !== undefined) {
+    if (result.status == 'error') {
         res.status(409).json(result);
     } else {
         res.status(200).json(result);
@@ -47,5 +47,5 @@ export async function logout(req: Request, res: Response) {
 export async function deleteUser(req: Request, res: Response) {
     const userName = req.query.name as string;
     const result = await userServiceInstance.deleteUser(userName);
-    await res.status(200).json({ message: 'ok' });
+    res.status(result.status).json(result);
 }

@@ -174,7 +174,6 @@ describe('DELETE /users', () => {
         request(app)
             .delete('/users?name=randomuser')
             .expect(200)
-            .expect({ message: 'ok' });
-        done();
+            .expect({ status: 200, message: 'ok' }, done);
     });
 });
