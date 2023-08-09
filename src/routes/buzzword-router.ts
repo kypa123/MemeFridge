@@ -18,7 +18,7 @@ buzzwordRouter.get(
 
 buzzwordRouter.get('/', asyncHandler(buzzwordController.getBuzzwordsByOffset));
 
-buzzwordRouter.get('tags', asyncHandler(buzzwordController.getBuzzwordsByTags));
+buzzwordRouter.get('/tags', asyncHandler(buzzwordController.getBuzzwordsByTags));
 
 buzzwordRouter.post('/', asyncHandler(buzzwordController.addBuzzword));
 
