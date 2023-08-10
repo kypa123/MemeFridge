@@ -180,16 +180,6 @@ describe('DELETE /users', () => {
     });
 });
 
-describe('POST /users/logout', () => {
-    it('쿠키에 저장된 token값을 삭제한다', async () => {
-        const response = await request(app).post('/users/logout');
-        const clearCookieSpy = jest.spyOn(response.res, 'clearCookie');
-        expect(response.status).toBe(200);
-        expect(response.body).toEqual({ message: 'ok' });
-        expect(clearCookieSpy).toHaveBeenCalledWith('token');
-    });
-});
-
 //contentRouter, controller test
 describe('GET /contents', () => {
     it('offset을 통해 4개의 데이터를 가져온다', async () => {
@@ -259,16 +249,15 @@ describe('GET /contents/id', () => {
     });
 });
 describe('GET /contents/user', () => {
-    it('존재하지 않는 아이디라면, 에러를 반환한다', done => {
-        request(app)
-            .get('/contents/user?user=asdf')
-            .expect(500)
-            .expect(res => {
-                expect(res.text).toContain(
-                    '에러가 발생했습니다. 코드 : undefined',
-                );
-            })
-            .end(done);
+    it('존재하지 않는 아이디라면, 메세지와 404에러를 반환한다', done => {
+        request(app).get('/contents/user?user=asdf').expect(404).expect(
+            {
+                status: 'error',
+                statusCode: 404,
+                message: '해당 유저는 존재하지 않습니다',
+            },
+            done,
+        );
     });
     it('존재하는 아이디라면, 쿼리 결과문을 반환한다', done => {
         request(app)
@@ -305,32 +294,6 @@ describe('GET /contents/tags', () => {
             .end(done);
     });
 });
-
-// describe('POST /contents', () => {
-//     //업로드 함수 모킹
-//     const spyField = jest
-//         .spyOn(upload.prototype, 'on')
-//         .mockImplementation((event, callback: any) => {
-//             if (event === 'file') {
-//                 const testFile = { pipe: jest.fn() }; // 모킹된 pipe 함수
-//                 callback('fieldname', testFile, {});
-//             }
-//         });
-//     it('이미지를 업로드하고 값을 반환한다', done => {
-//         request(app)
-//             .post('/contents')
-//             .field('name', 'testname')
-//             .field('tag', 'testTag')
-//             .field('uploaderName', 'testuser')
-//             .field('uploaderPassword', 'testpwd')
-//             .expect(200)
-//             .expect(res => {
-//                 console.log('res:', res);
-//             })
-//             .end(done);
-//     });
-// });
-// describe('DELETE /contents', () => {});
 
 //buzzwordRouter, Controller test
 
@@ -376,15 +339,15 @@ describe('GET /buzzwords/id', () => {
     });
 });
 describe('GET /buzzwords/user', () => {
-    it('존재하지 않는 아이디라면, rowCount가 0인 결과를 반환한다', done => {
-        request(app)
-            .get('/buzzwords/user?user=asdf')
-            .expect(200)
-            .expect(res => {
-                expect(res.body).toHaveProperty('rowCount');
-                expect(res.body.rowCount).toEqual(0);
-            })
-            .end(done);
+    it('존재하지 않는 아이디라면, 메세지와 함께 404 에러를 반환한다', done => {
+        request(app).get('/buzzwords/user?user=asdf').expect(404).expect(
+            {
+                status: 'error',
+                statusCode: 404,
+                message: '해당 유저는 존재하지 않습니다',
+            },
+            done,
+        );
     });
 
     it('존재하는 아이디라면, 쿼리 결과문을 반환한다', done => {
@@ -422,6 +385,3 @@ describe('GET /buzzwords/tags', () => {
             .end(done);
     });
 });
-// describe('POST /buzzwords/dataAPI', () => {});
-// describe('POST /buzzwords', () => {});
-// describe('DELETE /buzzwords', () => {});

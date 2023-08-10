@@ -27,8 +27,14 @@ export async function getBuzzwordsByUserId(req: Request, res: Response) {
         name: userName,
         email: null,
     });
-    const result = await buzzwordServiceInstance.findByUserId(userId.res[0].id);
-    res.json(result);
+    if (userId.status == 'error') {
+        res.status(404).json(userId);
+    } else {
+        const result = await buzzwordServiceInstance.findByUserId(
+            userId.res[0].id,
+        );
+        res.json(result);
+    }
 }
 
 export async function getBuzzwordsByTags(req: Request, res: Response) {

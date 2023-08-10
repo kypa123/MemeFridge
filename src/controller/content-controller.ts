@@ -38,8 +38,14 @@ export async function getContentsByUser(req: Request, res: Response) {
         name: userName,
         email: null,
     });
-    const result = await contentServiceInstance.findByUserId(userId.res[0].id);
-    res.json(result);
+    if (userId.status == 'error') {
+        res.status(404).json(userId);
+    } else {
+        const result = await contentServiceInstance.findByUserId(
+            userId.res[0].id,
+        );
+        res.json(result);
+    }
 }
 
 export async function getContentsByTags(req: Request, res: Response) {
