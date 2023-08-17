@@ -26,3 +26,10 @@ FastAPI를 활용한 LLM데이터 수집 앱 - https://github.com/kypa123/MemeFr
 
 3. Nginx를 활용한 https 적용
    - 별도의 인스턴스에 docker container를 띄워 nginx를 실행하고, Certbot certificate를 통한 ssl 인증처리로 https를 적용하였습니다.
+
+4. ORM을 사용하지 않고, 로우쿼리로 코드를 작성
+   - pg라이브러리로 데이터베이스 커넥션을 형성하고, 모든 CRUD 및 데이터베이스 쿼리를 직접 로우쿼리로 작성했습니다.
+
+5. github actions를 통한 자동화배포, 테스트 진행
+   - supertest, jest 라이브러리를 통한 통합 테스트를 진행했습니다.
+   - github actions의 workflow로 test를 먼저 실행, 모든 테스트를 통과하면 클라우드 인스턴스에 자동 배포가 진행되도록 설정하였습니다.
