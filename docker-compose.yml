@@ -1,33 +1,36 @@
-version: "2"
+version: '2'
 services:
+    postgres:
+        image: postgres:13-alpine3.17
+        environment:
+            POSTGRES_USER: wallcraft
+            POSTGRES_PASSWORD: 1111
+            POSTGRES_DB: wallcraft
+        ports:
+            - 5432:5432
+        volumes:
+            - /home/ubuntu/app/db/pg/Postgres/var-13:/var/lib/postgresql/data
+        healthcheck:
+            test: pg_isready -U wallcraft -d wallcraft
+            interval: 10s
+            timeout: 3s
+            retries: 3
+    redis:
+        image: redis:7
+        ports:
+            - 6379:6379
 
-  postgres:
-    image: postgres:13-alpine3.17
-    environment:
-      POSTGRES_USER: wallcraft
-      POSTGRES_PASSWORD: 1111
-      POSTGRES_DB: wallcraft
-    ports:
-      - 5432:5432
-    volumes:
-      - /home/ubuntu/app/db/pg/Postgres/var-13:/var/lib/postgresql/data
+    app:
+        build:
+            context: .
+            dockerfile: ./DockerFile
+        env_file:
+            - ./.env
 
-  redis:
-    image: redis:7
-    ports:
-      - 6379:6379
+        ports:
+            - 80:3000
 
-  app:
-    build:
-      context: .
-      dockerfile:
-        ./DockerFile
-    env_file:
-      - ./.env
-
-    ports:
-      - 80:3000
-
-    depends_on:
-      - postgres
-      - redis
+        depends_on:
+            - postgres:
+                  condition: service_healthy
+            - redis
