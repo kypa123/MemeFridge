@@ -1,10 +1,9 @@
-import ContentModel from '../../src/db/models/content-model.ts';
-
+import NonMemberContentModel from '../../../src/db/models/non-member-content-model.ts';
 import { Pool } from 'pg';
 
 jest.mock('pg');
 
-const mockContentData = {
+const mockNonMemberContentData = {
     command: 'SELECT',
     rowCount: 4,
     oid: null,
@@ -12,46 +11,42 @@ const mockContentData = {
         {
             id: 1,
             creator: 2,
-            title: '첫번째',
+            name: '첫번째',
+            description: '첫번째설명',
             tags: '첫번째태그1 첫번째태그2',
-            count: 2,
-            url: '1234.com',
             created_at: '2023-07-28T12:12:55.710Z',
         },
         {
             id: 2,
             creator: 2,
-            title: '두번째',
+            name: '두번째',
+            description: '두번째설명',
             tags: '두번째태그1 두번째태그2',
-            count: 2,
-            url: '2222.com',
-            created_at: '2023-07-28T12:12:55.710Z',
+            created_at: '2023-07-28T12:12:55.718Z',
         },
         {
             id: 3,
             creator: 2,
-            title: '세번째',
+            name: '세번째',
+            description: '세번째 설명',
             tags: '세번째태그1 세번째태그2',
-            count: 23,
-            url: '3334.com',
-            created_at: '2023-07-28T12:12:55.710Z',
+            created_at: '2023-07-28T12:12:55.762Z',
         },
         {
             id: 4,
             creator: 2,
-            title: '네번째',
+            name: '네번째',
+            description: '네번째 설명',
             tags: '네번째태그1 네번째태그2',
-            count: 55,
-            url: '4444.com',
-            created_at: '2023-07-28T12:12:55.710Z',
+            created_at: '2023-07-28T12:12:55.764Z',
         },
     ],
 };
 
-it('ContentModelPoolQuery', async () => {
+it('nonMemberContentModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
     const mockPool: jest.Mocked<Pool> = {
-        query: jest.fn().mockResolvedValue(mockContentData.rows),
+        query: jest.fn().mockResolvedValue(mockNonMemberContentData.rows),
         totalCount: 0,
         idleCount: 0,
         waitingCount: 0,
@@ -73,7 +68,10 @@ it('ContentModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new ContentModel(mockPool);
-    const result = await testModel.findAll();
-    expect(result).toEqual(mockContentData.rows);
+    const testModel = new NonMemberContentModel(mockPool);
+    const result = await testModel.addNonMemberContent({
+        contentId: 1234,
+        auth: 'random',
+    });
+    expect(result).toEqual(mockNonMemberContentData.rows);
 });

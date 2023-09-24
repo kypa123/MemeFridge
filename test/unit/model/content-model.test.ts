@@ -1,9 +1,10 @@
-import BuzzwordModel from '../../src/db/models/buzzword-model.ts';
+import ContentModel from '../../../src/db/models/content-model.ts';
+
 import { Pool } from 'pg';
 
 jest.mock('pg');
 
-const mockBuzzwordData = {
+const mockContentData = {
     command: 'SELECT',
     rowCount: 4,
     oid: null,
@@ -11,43 +12,46 @@ const mockBuzzwordData = {
         {
             id: 1,
             creator: 2,
-            name: '첫번째',
-            description: '첫번째설명',
+            title: '첫번째',
             tags: '첫번째태그1 첫번째태그2',
+            count: 2,
+            url: '1234.com',
             created_at: '2023-07-28T12:12:55.710Z',
         },
         {
             id: 2,
             creator: 2,
-            name: '두번째',
-            description: '두번째설명',
+            title: '두번째',
             tags: '두번째태그1 두번째태그2',
-            created_at: '2023-07-28T12:12:55.718Z',
+            count: 2,
+            url: '2222.com',
+            created_at: '2023-07-28T12:12:55.710Z',
         },
         {
             id: 3,
             creator: 2,
-            name: '세번째',
-            description: '세번째 설명',
+            title: '세번째',
             tags: '세번째태그1 세번째태그2',
-            created_at: '2023-07-28T12:12:55.762Z',
+            count: 23,
+            url: '3334.com',
+            created_at: '2023-07-28T12:12:55.710Z',
         },
         {
             id: 4,
             creator: 2,
-            name: '네번째',
-            description: '네번째 설명',
+            title: '네번째',
             tags: '네번째태그1 네번째태그2',
-            created_at: '2023-07-28T12:12:55.764Z',
+            count: 55,
+            url: '4444.com',
+            created_at: '2023-07-28T12:12:55.710Z',
         },
     ],
 };
 
-it('buzzwordModelPoolQuery', async () => {
+it('ContentModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
-    const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
-        query: jest.fn().mockResolvedValue(mockBuzzwordData.rows),
+        query: jest.fn().mockResolvedValue(mockContentData.rows),
         totalCount: 0,
         idleCount: 0,
         waitingCount: 0,
@@ -69,7 +73,7 @@ it('buzzwordModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new BuzzwordModel(mockPool);
+    const testModel = new ContentModel(mockPool);
     const result = await testModel.findAll();
-    expect(result).toEqual(mockBuzzwordData.rows);
+    expect(result).toEqual(mockContentData.rows);
 });

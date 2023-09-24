@@ -1,4 +1,4 @@
-import UserModel from '../../src/db/models/user-model.ts';
+import UserModel from '../../../src/db/models/user-model.ts';
 import { Pool } from 'pg';
 
 jest.mock('pg');

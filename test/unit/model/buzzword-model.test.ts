@@ -1,9 +1,9 @@
-import NonMemberContentModel from '../../src/db/models/non-member-content-model.ts';
+import BuzzwordModel from '../../../src/db/models/buzzword-model.ts';
 import { Pool } from 'pg';
 
 jest.mock('pg');
 
-const mockNonMemberContentData = {
+const mockBuzzwordData = {
     command: 'SELECT',
     rowCount: 4,
     oid: null,
@@ -43,10 +43,11 @@ const mockNonMemberContentData = {
     ],
 };
 
-it('nonMemberContentModelPoolQuery', async () => {
+it('buzzwordModelPoolQuery', async () => {
     (Pool as jest.MockedClass<typeof Pool>).mockImplementation(() => mockPool);
+    const connectionInfo = 'mocked connectionInfo';
     const mockPool: jest.Mocked<Pool> = {
-        query: jest.fn().mockResolvedValue(mockNonMemberContentData.rows),
+        query: jest.fn().mockResolvedValue(mockBuzzwordData.rows),
         totalCount: 0,
         idleCount: 0,
         waitingCount: 0,
@@ -68,10 +69,7 @@ it('nonMemberContentModelPoolQuery', async () => {
         prependOnceListener: jest.fn(),
         eventNames: jest.fn(),
     };
-    const testModel = new NonMemberContentModel(mockPool);
-    const result = await testModel.addNonMemberContent({
-        contentId: 1234,
-        auth: 'random',
-    });
-    expect(result).toEqual(mockNonMemberContentData.rows);
+    const testModel = new BuzzwordModel(mockPool);
+    const result = await testModel.findAll();
+    expect(result).toEqual(mockBuzzwordData.rows);
 });
